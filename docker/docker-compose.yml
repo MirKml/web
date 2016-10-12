@@ -1,0 +1,25 @@
+dbm:
+  image: mirin:dbm
+  ports:
+    - "8081:80"
+  links:
+    - db
+
+mirin.cz:
+  image: mirin:web
+  ports:
+    - "80:80"
+  extra_hosts:
+    - "www.mirin.dkl:127.0.0.1"
+  volumes:
+    - ../:/var/www/mirin_cz
+  links:
+    - db
+
+db:
+  image: mysql:5.6
+  volumes:
+    - ../dbdumps:/usr/src/dbdumps
+    - ../dbdata:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: localdb

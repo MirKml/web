@@ -1,0 +1,10 @@
+log/*
+temp/*
+vendor/*
+dbdata/*
+dbdumps/*
+!.gitignore
+!.htaccess
+app/config/config.local.neon
+composer.lock
+.idea/*
