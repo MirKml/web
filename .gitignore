@@ -1,5 +1,5 @@
-log
-temp
+log/*
+temp/*
 vendor
 dbdata
 dbdumps
@@ -7,4 +7,4 @@ dbdumps
 !.htaccess
 app/config/config.local.neon
 composer.lock
-.idea/*
+.idea
