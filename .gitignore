@@ -1,8 +1,8 @@
-log/*
-temp/*
-vendor/*
-dbdata/*
-dbdumps/*
+log
+temp
+vendor
+dbdata
+dbdumps
 !.gitignore
 !.htaccess
 app/config/config.local.neon
