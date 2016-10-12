@@ -3,10 +3,21 @@ parameters:
 application:
 	errorPresenter: Error
 	mapping:
-		*: App\*Module\Presenters\*Presenter
+		*: Mirin\*Module\Presenters\*Presenter
 
 session:
 	expiration: 14 days
 
+extensions:
+	dibi: Dibi\Bridges\Nette\DibiExtension22
+
+dibi:
+	host: db
+	username: ***
+	password: ***
+	database: foo
+	lazy: TRUE
+
 services:
-	router: App\RouterFactory::createRouter
+	- Mirin\Model\BlogEntryRepository
+	router: Mirin\RouterFactory::createRouter

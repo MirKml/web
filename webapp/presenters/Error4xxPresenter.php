@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Presenters;
+namespace Mirin\Presenters;
 
 use Nette;
 
-
-class Error4xxPresenter extends BasePresenter
+class Error4xxPresenter extends Nette\Application\UI\Presenter
 {
 
 	public function startup()
@@ -15,7 +14,6 @@ class Error4xxPresenter extends BasePresenter
 			$this->error();
 		}
 	}
-
 
 	public function renderDefault(Nette\Application\BadRequestException $exception)
 	{

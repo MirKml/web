@@ -6,7 +6,7 @@ use Nette;
 use App\Forms;
 
 
-class SignPresenter extends BasePresenter
+class SignPresenter extends Nette\Application\UI\Presenter
 {
 	/** @var Forms\SignInFormFactory @inject */
 	#public $signInFactory;
