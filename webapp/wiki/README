@@ -1,0 +1,25 @@
+Most of this classes are just simple rewrites from original dokuwiki classes.
+Added better support for PHP5 - abstract classes, members visibility with 
+the encapsulation, static methods, type hinting. Not all classes are rewritten
+completely.
+
+Classes are organized in the Zend_Loader compliant directory structure.     
+ 
+For original dokuwiki source and copyrights see 
+http://wiki.splitbrain.org/wiki:dokuwiki.
+
+
+Some researched workflow, which I found in the dokuwiki parser documentation
+and in the source code.
+
+- call parser->parse($doc) this only calls lexer->parse($doc)
+- lexer->parse calls reduce($doc) in loop
+ - reduce return: prematched text, matched text label for regexp, that match the pattern,
+ label is mode, for special modes, label is _mode e.g. _eol
+ - call dispatchTokens() with above mentioned variables.
+ - in dispatchTokens() add current mode onto stack and sent current matched text
+ to the handler = call handler method for current mode with matched text, lexer state and
+ position state in dispatchTokens()
+ - dispatchTokens() calls invokeToken(), it calls handler for every call from the lexer, 
+  adds one entry in his array with the appropriate instructions
+

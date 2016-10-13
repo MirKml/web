@@ -21,13 +21,16 @@ class BlogEntryRepository
 
 	/**
 	 * List of articles with comments and authors
-	 * @param Paginator
+	 * @param Paginator $paginator
 	 * @return array
 	 */
 	public function getList(Paginator $paginator)
 	{
-		return $this->db->fetchAll("
-			select article.title, article.titleUrl, article.posted, article.text,
+		$articles = [];
+		foreach ($this->db->query("
+			select article.id, article.title, article.titleUrl, article.posted, article.text,
+				article.format,
+				author.name as authorName,
 				COUNT(comment.id) as commentsCount
 			from article
 			left join author on author.id = article.author_id
@@ -35,7 +38,13 @@ class BlogEntryRepository
 			where article.status = 'published'
 			group by article.id
 			order by article.posted desc
-			%lmt %ofs", $paginator->getItemsPerPage(), $paginator->getOffset());
+			%lmt %ofs", $paginator->getItemsPerPage(), $paginator->getOffset())
+				 as $articleRow) {
+
+			$articles[] = new BlogEntry($articleRow);
+		}
+
+		return $articles;
 	}
 
 	/**
@@ -43,7 +52,7 @@ class BlogEntryRepository
 	 */
 	public function getPublishedCount()
 	{
-		return (int)$this->db->fetchSingle("select count(*) from articles
+		return (int)$this->db->fetchSingle("select count(*) from article
 			where status = 'published'");
 	}
 

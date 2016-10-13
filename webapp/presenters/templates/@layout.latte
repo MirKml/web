@@ -1,28 +1,128 @@
-{**
- * @param string   $basePath web base path
- * @param array    $flashes  flash messages
- *}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-	<meta charset="utf-8">
+    <link href="http://gmpg.org/xfn/11" rel="profile">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Sandbox</title>
+    <!-- added from octo -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
-	<link rel="stylesheet" href="{$basePath}/css/style.css">
-	<meta name="viewport" content="width=device-width">
-	{block head}{/block}
+    <!--Fonts from Google"s Web font directory at http://google.com/webfonts added from Octo -->
+    <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet"
+          type="text/css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet"
+          type="text/css">
+
+    <!-- goes into the title bar -->
+    <title>Mirin webspace{if $pageSubTitle} - {$pageSubtitle}{/if}</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="/css/hugo-octopress.css">
+    <link rel="stylesheet" href="/css/mirin.css">
+
+    <!-- For sidebar icons - TODO: find local icons I guess-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <!-- Icons -->
+    <link href="/favicon.png" rel="icon">
+
+    <!--  RSS
+    <link href="{{ . }}" rel="alternate" type="application/rss+xml" title="{{ $siteTitle }}"/>
+    -->
+
+    <!--  meta description
+    <meta name="description" content="{{ if ne .Description "
+    <meta name="keywords"
+          content="{{ range $index, $element := .Keywords }}{{ if gt $index 0 }},{{ end }}{{ . }}{{ else }}{{ .Site.Params.defaultKeywords }}{{ end }}">
+    -->
+
+    <meta name="author" content="Miroslav Kubelík">
+    -->
 </head>
 
-<body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+<body
+<!-- top header -->
+<header role="banner">
+    <hgroup>
+        <h1><a href="/">Mirin webspace</a></h1>
+        <h2>Nejbohatší život má ten, kdo žije s minimem nároků</h2>
+    </hgroup>
+</header>
 
-	{include content}
+<!-- navigation -->
+<nav role="navigation">
+    <ul class="main-navigation">
+        <li><a href="" title="Informace o mě">Kdo jsem</a></li>
+        <li><a href="" title="Blog">Blog</a></li>
+        <li><a href="" title="Blog">Binární tvorba</a></li>
+    </ul>
 
-	{block scripts}
-	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-	<script src="{$basePath}/js/main.js"></script>
-	{/block}
+    <ul class="subscription">
+        <a href="" target="_blank" type="application/rss+xml" title="RSS"><i class="fa fa-rss-square fa-lg"></i></a>
+    </ul>
+
+    <form action="" method="get" target="_blank">
+        <fieldset role="search">
+            <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+            <input type="hidden" name="q" value="site:www.mirin.cz"/>
+        </fieldset>
+    </form>
+</nav>
+
+<div id="main">
+    <div id="content">
+        {block content}{/block}
+
+        <aside class="sidebar thirds">
+            <section class="first odd">
+                <h1>Kdo jsem</h1>
+
+                <p>
+                    Text
+                </p>
+            </section>
+
+            <!-- Sidebar social network icons -->
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a target="_blank" href="https://github.com/MirKml" title="."><i class="fa fa-github fa-3x"></i></a>
+                    <a target="_blank" href="https://cz.linkedin.com/in/miroslav-kubelík-b1637bb7" title="."><i class="fa fa-linkedin fa-3x"></i></a>
+                    <!--
+                    <a target="_blank" href="" title=""><i class="fa fa-twitter fa-3x"></i></a>
+                    -->
+                </li>
+            </ul>
+
+            <section class="odd">
+                <h1>Katogorie</h1>
+                <li>
+                    <a href="" title="" target="_blank">Kategorie 1</a>
+                </li>
+                <li>
+                    <a href="" title="" target="_blank">Kategorie 2</a>
+                </li>
+            </section>
+
+            <section class="even">
+                <h1>Vybrané články</h1>
+                <ul id="recent_posts">
+                    <li class="post">
+                        <a href=""></a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+</div>
+
+<footer role="contentinfo">
+    <p>Copyright &copy; 2007 - {date("Y")} - <a href="">License</a> -
+        <span class="credit">Používá <a target="_blank" href="https://nette.org">Nette</a>,
+            design podle <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> tématu.
+    </p>
+</footer>
+
 </body>
 </html>

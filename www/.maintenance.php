@@ -15,12 +15,12 @@ header('Retry-After: 300'); // 5 minutes in seconds
 	p { font: 21px/1.5 Georgia,serif; margin: 1.5em 0 }
 </style>
 
-<title>Site is temporarily down for maintenance</title>
+<title>Web je dočasně nedostupný - Site is temporarily down for maintenance</title>
 
-<h1>We're Sorry</h1>
+<h1>Omlouvám se - I'm Sorry</h1>
+
+<p>Web je dočasně nedostupný kvůli úpravám. Zkuste to za pár minut znovu.</p>
 
 <p>The site is temporarily down for maintenance. Please try again in a few minutes.</p>
-
 <?php
-
 exit;
