@@ -28,6 +28,7 @@
     <!-- Icons -->
     <link href="/favicon.png" rel="icon">
 
+    {block javascriptsHeader}{/block}
     <!--  RSS
     <link href="{{ . }}" rel="alternate" type="application/rss+xml" title="{{ $siteTitle }}"/>
     -->
@@ -37,9 +38,7 @@
     <meta name="keywords"
           content="{{ range $index, $element := .Keywords }}{{ if gt $index 0 }},{{ end }}{{ . }}{{ else }}{{ .Site.Params.defaultKeywords }}{{ end }}">
     -->
-
     <meta name="author" content="Miroslav Kubelík">
-    -->
 </head>
 
 <body

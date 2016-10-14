@@ -1,3 +1,7 @@
+{block javascriptsHeader}
+<script type="text/javascript" src="/js/netteForms.js"></script>
+{/block}
+
 {block content}
 <div>
     <article class="hentry" role="article">
@@ -15,7 +19,6 @@
 
         <div class="entry-content">
             {$article->getHtmlText()|noescape}
-            {control commentForm}
         </div>
 
         <footer>
@@ -40,7 +43,7 @@
 
     <hr>
     <a name="comments"></a>
-    <section>
+    <section class="comments">
         <h2>Komentáře (2) <a href="#addComment">Přidej komentář</a></h2>
         <ol n:inner-foreach="$comments as $comment">
             <li class="comment">
@@ -50,8 +53,20 @@
             </article>
             </li>
         </ol>
-        <article>
-        </article>
+
+        {form commentForm class => commentForm}
+        <fieldset><legend>Přidej komentář</legend>
+            {label name}
+            {input name}
+            {label email}
+            {input email}
+            {label www}
+            {input www}
+            {label message}
+            {input message}
+            {input send}
+        </fieldset>
+        {/form}
     </section>
 </div>
 {/block}

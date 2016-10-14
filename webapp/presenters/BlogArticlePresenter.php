@@ -53,13 +53,15 @@ class BlogArticlePresenter extends UI\Presenter
 	protected function createComponentCommentForm()
 	{
 		$form = new UI\Form();
-		$form->addText("name", "jméno")
+		$form->addText("name", "Jméno (povinné)")
 			->setRequired("Vyplňte jméno");
-		$form->addText("email", "email")
-			->setRequired("Vyplňte email");
-		$form->addText("www", "www");
-		$form->addTextArea("message");
-		$form->addSubmit('send', 'Vlož');
+		$form->addText("email", "Email (povinný)")
+			->setRequired("Vyplňte email")
+			->addRule(UI\Form::EMAIL, "Nerozpoznán platný email, zkuste to znovu");
+		$form->addText("www", "Váš web");
+		$form->addTextArea("message", "Tvůj komentář")
+			->setRequired("Vyplňte komentář");
+		$form->addSubmit("send", "Náhled");
 		$form->onSuccess[] = [$this, "handleCommentForm"];
 		return $form;
 	}

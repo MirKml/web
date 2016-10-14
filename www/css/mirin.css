@@ -28,12 +28,16 @@ pre.codeOutput  {
 .codeOutput .st_h { color: #ff0000; }
 .codeOutput .sy0  { color: #66cc66; }
 
-
+/*
+ disable text color a hoover for anchors in h2, h2 in wiki texts
+ overwrites the octopress css behaviour
+*/
 .heading2 a {
     color: inherit;
     text-decoration: none;
 }
 
+/* comment, uses styles from the octopress article css */
 .comment article {
     padding-top: 0.5em;
 }
@@ -54,3 +58,30 @@ pre.codeOutput  {
     background-color: #edf3de;
 }
 
+/* comment form */
+.commentForm fieldset {
+    padding: 1em;
+    border: 1px solid black;
+}
+
+.commentForm input[type=text],
+    input[type=email],
+    textarea {
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 3px black;
+    border: 1px solid black;
+    padding: 0.7em;
+    margin: 0.5em 0;
+}
+
+.commentForm input[type=submit] {
+    box-shadow: inset -1px -1px 3px black;
+    border-radius: 3px;
+    font-weight: bold;
+    padding: 0.5em;
+}
+
+.commentForm textarea {
+    height: 7em;
+}
