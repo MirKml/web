@@ -1,7 +1,6 @@
 <?php
 namespace Mirin\Model;
 
-use Nette;
 use Dibi;
 
 class BlogArticle
@@ -35,7 +34,6 @@ class BlogArticle
 	private $wikiParser;
 
 	/**
-	 * BlogEntry constructor.
 	 * @param Dibi\Row
 	 */
 	public function __construct(Dibi\Row $row)

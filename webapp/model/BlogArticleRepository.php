@@ -33,7 +33,7 @@ class BlogArticleRepository
 				author.name as authorName,
 				COUNT(comment.id) as commentsCount
 			from article
-			left join author on author.id = article.author_id
+			inner join author on author.id = article.author_id
 			left join comment on comment.article_id = article.id 
 			where article.status = 'published'
 			group by article.id
@@ -45,6 +45,22 @@ class BlogArticleRepository
 		}
 
 		return $articles;
+	}
+
+	/**
+	 * @param string $slug
+	 * @return BlogArticle|void
+	 */
+	public function getBySlug($slug)
+	{
+		$articleRow = $this->db->fetch("select article.id, title, posted, text, format,
+			author.name as authorName
+			from article
+			inner join author on author.id = article.author_id
+			where titleUrl = %s", $slug, "
+				and status = 'published'");
+		if (!$articleRow) return;
+		return new BlogArticle($articleRow);
 	}
 
 	/**

@@ -16,7 +16,7 @@ class IndexPresenter extends Nette\Application\UI\Presenter
 	 * @inject
 	 * @var Model\BlogArticleRepository
 	 */
-	public $blogEntryRepository;
+	public $blogArticleRepository;
 
 	/**
 	 * @inject
@@ -27,9 +27,9 @@ class IndexPresenter extends Nette\Application\UI\Presenter
 	public function renderDefault()
 	{
 		$paginatorFactory = new PaginatorFactory($this->getHttpRequest());
-		$this->paginator = $paginatorFactory->getPaginator($this->blogEntryRepository->getPublishedCount(),
+		$this->paginator = $paginatorFactory->getPaginator($this->blogArticleRepository->getPublishedCount(),
 			Model\BlogArticleRepository::ITEMS_PER_PAGE);
-		$articles = $this->blogEntryRepository->getList($this->paginator);
+		$articles = $this->blogArticleRepository->getList($this->paginator);
 		$relation = new Model\BlogArticleRelation($articles);
 		$relation->setCategoryRepository($this->blogCategoryRepository);
 

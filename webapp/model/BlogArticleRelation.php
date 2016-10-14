@@ -53,7 +53,7 @@ class BlogArticleRelation
 	public function getCategoriesForArticle(BlogArticle $article)
 	{
 		if (!$this->categories) {
-			$this->categories = $this->categoryRepository->getByEntries($this->getIdentifiers());
+			$this->categories = $this->categoryRepository->getByArticles($this->getIdentifiers());
 		}
 
 		return isset($this->categories[$article->id])

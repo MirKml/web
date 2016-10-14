@@ -21,4 +21,5 @@ dibi:
 services:
 	- Mirin\Model\BlogArticleRepository
 	- Mirin\Model\BlogCategoryRepository
+	- Mirin\Model\BlogCommentRepository
 	router: Mirin\RouterFactory::createRouter

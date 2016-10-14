@@ -1,7 +1,7 @@
 <?php
 namespace Mirin\Model;
 
-class BlogCategoryRepository
+class BlogCommentRepository
 {
 	/**
 	 * @var \Dibi\Connection
@@ -14,15 +14,17 @@ class BlogCategoryRepository
 	}
 
 	/**
-	 * @param array $entryIDs
+	 * @param BlogArticle $article
 	 * @return array
 	 */
-	public function getByEntries(array $entryIDs)
+	public function getByArticle(BlogArticle $article)
 	{
-		return $this->db->query("select category.*, categoryarticle.article_id
-			from category
-			inner join categoryarticle on categoryarticle.category_id = category.id 
-				and categoryarticle.article_id IN (%i)", $entryIDs)
-			->fetchAssoc("article_id[]");
+		foreach ($this->db->fetchAll("select *
+			from comment
+			where article_id = %i", $article->id) as $commentRow) {
+
+			$comments[] = new BlogComment($commentRow);
+		};
+		return isset($comments) ? $comments : [];
 	}
 }

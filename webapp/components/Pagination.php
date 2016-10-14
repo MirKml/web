@@ -31,11 +31,13 @@ class Pagination extends Nette\Application\UI\Control
 		$pageOffset = 5;
 		$pageCount = $this->paginator->getPageCount();
 		$currentPage = $this->paginator->getPage();
-		$firstPage = max(1, $currentPage - $pageOffset + 1);
-		$lastPage = min($pageCount, $currentPage + $pageOffset);
+		$firstRangePage = max(1, $currentPage - $pageOffset + 1);
+		$lastRangePage = min($pageCount, $firstRangePage + $pageOffset * 2 - 1);
 
+		$template->currentPage = $currentPage;
+		$template->firstRangePage = $firstRangePage;
+		$template->lastRangePage = $lastRangePage;
 		$template->pageCount = $pageCount;
-		$template->firstPage = $firstPage;
 		$template->setFile(__DIR__ . "/templates/pagination.latte");
 		$template->render();
 	}

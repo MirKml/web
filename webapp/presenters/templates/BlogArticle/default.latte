@@ -1,0 +1,57 @@
+{block content}
+<div>
+    <article class="hentry" role="article">
+        <!-- header for each post -->
+        <header>
+            <p class="meta">{$article->posted|date:"j. m. Y"}{if $comments} - <a href="#comments">Komentáře ({count($comments)})</a>{/if}
+                {foreach $articlesRelation->getCategoriesForArticle($article) as $category}
+                    <a class="label" href="">{$category->name}</a>
+                {/foreach}
+            </p>
+            <h1 class="entry-title">
+                {$article->title}
+            </h1>
+        </header>
+
+        <div class="entry-content">
+            {$article->getHtmlText()|noescape}
+            {control commentForm}
+        </div>
+
+        <footer>
+            <p class="meta">
+                <span class="byline author vcard">Posted by <span class="fn">{$article->authorName}</span></span>
+                <!-- can't put the .Date.Format inside the datetime attribute because of double quotes, so it's outside -->
+                <time>{$article->posted|date:"j. m. Y"}</time>
+                <span class="categories" n:foreach="$articlesRelation->getCategoriesForArticle($article) as $category">
+                    <a class="category" href="">{$category->name}</a>
+                </span>
+            </p>
+
+            <!-- For sharing stuff -->
+            <!-- <div class="sharing"> </div> -->
+
+            <p class="meta">
+                <a class="basic-alignment left" href="" title="Previous">Previous</a>
+                <a class="basic-alignment right" href="" title="Previous">Next</a>
+            </p>
+        </footer>
+    </article>
+
+    <hr>
+    <a name="comments"></a>
+    <section>
+        <h2>Komentáře (2) <a href="#addComment">Přidej komentář</a></h2>
+        <ol n:inner-foreach="$comments as $comment">
+            <li class="comment">
+            <article>
+                <header>{$comment->name} - {$comment->posted|date:"j.m. Y H:i"}</header>
+                <p>{$comment->getHtmlMessage()|noescape}</p>
+            </article>
+            </li>
+        </ol>
+        <article>
+        </article>
+    </section>
+</div>
+{/block}
