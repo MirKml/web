@@ -4,10 +4,8 @@ namespace Mirin\Model;
 use Nette;
 use Dibi;
 
-class BlogEntry
+class BlogArticle
 {
-	use Nette\SmartObject;
-
 	public $id;
 	public $text;
 	public $plainText;
@@ -22,18 +20,19 @@ class BlogEntry
 	public $commentsCount;
 
 	/**
+	 * @var $description
+	 */
+	private $description;
+
+	/**
 	 * @var string
 	 */
 	private $htmlText;
+
 	/**
 	 * @var \WikiText_Parser
 	 */
 	private $wikiParser;
-
-	/**
-	 * @var $description
-	 */
-	private $description;
 
 	/**
 	 * BlogEntry constructor.
@@ -54,7 +53,7 @@ class BlogEntry
 		if ($this->htmlText) return $this->htmlText;
 
 		if ($this->format == "html") {
-			return $this->htmlText = self::escapeCode($this->text);
+			return $this->htmlText = self::escapeCodeTagContent($this->text);
 		}
 
 		// clear handler calls, necessary, because parser is persistent
@@ -114,14 +113,16 @@ class BlogEntry
 	/**
 	 * Makes html special chars conversion for all text in the <code> tag for a whole
 	 * article text.
-	 * @param string $articleText article text as the html
+	 * @param string $htmlText article text as the html
 	 * @return string
 	 */
-	public static function escapeCode($articleText)
+	private static function escapeCodeTagContent($htmlText)
 	{
 		$pattern = "/<code>((\\n|.)*)<\/code>/U";
-		$text = preg_replace_callback($pattern, ['Blog_Model_Article', 'escapeCodeCallback'], $articleText);
-		return $text;
+		$sanitizedHtml = preg_replace_callback($pattern, function($matches) {
+			return "<code>" . htmlspecialchars($matches[1]) . "</code>";
+		}, $htmlText);
+		return $sanitizedHtml;
 
 		/* alternatively, with non-transparent $replacement, stripslashes in a replacement
 		needed because /e regexp modifier slashes all ' "
@@ -129,16 +130,6 @@ class BlogEntry
 		$replacement="'<code>'.htmlspecialchars(stripslashes('\\1'),ENT_NOQUOTES).'</code>'";
 		$text=preg_replace($pattern,$replacement,$articleText);
 		*/
-	}
-
-	/**
-	 * Callback for the {@link escapeCode()}
-	 * @param array $matches array with regexp matches
-	 * @return string
-	 */
-	public static function escapeCodeCallback($matches)
-	{
-		return "<code>" . htmlspecialchars($matches[1]) . "</code>";
 	}
 
 	/**

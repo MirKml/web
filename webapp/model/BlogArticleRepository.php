@@ -4,7 +4,7 @@ namespace Mirin\Model;
 use Dibi;
 use Nette\Utils\Paginator;
 
-class BlogEntryRepository
+class BlogArticleRepository
 {
 
 	const ITEMS_PER_PAGE = 5;
@@ -41,7 +41,7 @@ class BlogEntryRepository
 			%lmt %ofs", $paginator->getItemsPerPage(), $paginator->getOffset())
 				 as $articleRow) {
 
-			$articles[] = new BlogEntry($articleRow);
+			$articles[] = new BlogArticle($articleRow);
 		}
 
 		return $articles;

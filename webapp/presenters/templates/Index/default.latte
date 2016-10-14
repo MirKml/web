@@ -4,15 +4,16 @@
     <article>
         <header>
             <p class="meta">{$article->posted|date:"j. m. Y"} - <a href="">Komentáře ({$article->commentsCount})</a>
-                <a class="label" href="">Kategorie 1</a>
-                <a class="label" href="">Kategorie 2</a>
+                {foreach $articlesRelation->getCategoriesForArticle($article) as $category}
+                <a class="label" href="">{$category->name}</a>
+                {/foreach}
             </p>
             <h1 class="entry-title">
                 <a href="">{$article->title}</a>
             </h1>
         </header>
 
-        {$article->getHtmlText()|noescape}
+        {$article->getDescription()|noescape}
 
         <footer>
             <a href="" rel="full-article">Číst dál &rarr;</a>
@@ -20,16 +21,6 @@
     </article>
     {/foreach}
 
-    <div class="pagination">
-        <a href="" aria-label="First" class="label-pagination"><i class="fa fa-angle-double-left fa-lg"></i></a>
-        <a href="" aria-label="Previous" class="label-pagination"><i class="fa fa-angle-left fa-lg"></i></a>
-
-        <a href="" class="label-pagination">1</a>
-        <a href="" class="label-pagination">2</a>
-        <a href="" class="label-pagination">3</a>
-
-        <a href="" aria-label="Next" class="label-pagination"><i class="fa fa-angle-right fa-lg"></i></a>
-        <a href="" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
-    </div>
+    {control pagination}
 </div>
 {/block}

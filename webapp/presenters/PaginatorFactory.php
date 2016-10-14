@@ -30,6 +30,8 @@ class PaginatorFactory
 			->setItemsPerPage($itemsPerPage);
 		if (($page = $this->request->getQuery(self::PAGE_PARAMETER))) {
 			$paginator->setPage($page);
+		} else {
+			$paginator->setPage(1);
 		}
 		return $paginator;
 	}

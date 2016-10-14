@@ -1,0 +1,11 @@
+<div class="pagination">
+    <a href="" aria-label="First" class="label-pagination"><i class="fa fa-angle-double-left fa-lg"></i></a>
+    <a href="" aria-label="Previous" class="label-pagination"><i class="fa fa-angle-left fa-lg"></i></a>
+
+    {foreach range(1, $pageCount) as $pageNumber}
+    <a href="{$firstPageUrl}?page={$pageNumber}" class="label-pagination">{$pageNumber}</a>
+    {/foreach}
+
+    <a href="" aria-label="Next" class="label-pagination"><i class="fa fa-angle-right fa-lg"></i></a>
+    <a href="" aria-label="Last"><i class="fa fa-angle-double-right fa-lg"></i></a>
+</div>

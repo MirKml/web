@@ -19,5 +19,6 @@ dibi:
 	lazy: TRUE
 
 services:
-	- Mirin\Model\BlogEntryRepository
+	- Mirin\Model\BlogArticleRepository
+	- Mirin\Model\BlogCategoryRepository
 	router: Mirin\RouterFactory::createRouter
