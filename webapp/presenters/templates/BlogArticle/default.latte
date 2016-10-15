@@ -44,6 +44,9 @@
     <hr>
     <a name="comments"></a>
     <section class="comments">
+        {foreach $flashes as $flash}
+            <div><i class="fa fa-info fa-2" aria-hidden="true"></i> {$flash->message}</div>
+        {/foreach}
         <h2>Komentáře (2) <a href="#addComment">Přidej komentář</a></h2>
         <ol n:inner-foreach="$comments as $comment">
             <li class="comment">
@@ -52,10 +55,29 @@
                 <p>{$comment->getHtmlMessage()|noescape}</p>
             </article>
             </li>
+            {if $iterator->isLast() && $commentPreview}
+            <a name="newComment"></a>
+            <li class="comment">
+                <article>
+                    <header>Náhled nového komentáře</header>
+                    <p>{$commentPreview->getHtmlMessage()|noescape}</p>
+                </article>
+            </li>
+            {/if}
         </ol>
 
         {form commentForm class => commentForm}
         <fieldset><legend>Přidej komentář</legend>
+            {if $control["commentForm"]->hasErrors()}
+                <ul class=error n:if="$form->ownErrors" style="color: red; list-style-type: none;">
+                    {foreach $control["commentForm"]->getErrors() as $error}
+                    <li>
+                        <i class="fa fa-exclamation-triangle fa-2" aria-hidden="true"></i> {$error}
+                    </li>
+                    {/foreach}
+                </ul>
+            {/if}
+
             {label name}
             {input name}
             {label email}
@@ -64,9 +86,18 @@
             {input www}
             {label message}
             {input message}
-            {input send}
+            {if $commentPreview}
+                Opište kód <img src="{$captchaImageUrl}">
+                {input code}
+                {input preview}
+                {input save}
+                {input hash}
+            {else}
+                {input preview}
+            {/if}
         </fieldset>
         {/form}
+
     </section>
 </div>
 {/block}
