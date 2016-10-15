@@ -51,12 +51,15 @@
         <ol n:inner-foreach="$comments as $comment">
             <li class="comment">
             <article>
-                <header>{$comment->name} - {$comment->posted|date:"j.m. Y H:i"}</header>
+                <header>
+                    {if $comment->getAuthorWeb()}<a href="{$comment->getAuthorWeb()}">{$comment->name}</a>
+                    {else}{$comment->name}{/if} - {$comment->posted|date:"j.m. Y H:i"}
+                </header>
                 <p>{$comment->getHtmlMessage()|noescape}</p>
             </article>
             </li>
+
             {if $iterator->isLast() && $commentPreview}
-            <a name="newComment"></a>
             <li class="comment">
                 <article>
                     <header>Náhled nového komentáře</header>
@@ -66,6 +69,7 @@
             {/if}
         </ol>
 
+        <a name="addComment"></a>
         {form commentForm class => commentForm}
         <fieldset><legend>Přidej komentář</legend>
             {if $control["commentForm"]->hasErrors()}

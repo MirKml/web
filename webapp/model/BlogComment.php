@@ -41,4 +41,16 @@ class BlogComment
 
 		return $text;
 	}
+
+	/**
+	 * @return string|void
+	 */
+	public function getAuthorWeb()
+	{
+		if (!$this->www) return;
+		if (strpos($this->www, "http://") === 0 || strpos($this->www, "https://") === 0) {
+			return $this->www;
+		}
+		return "http://" . $this->www;
+	}
 }

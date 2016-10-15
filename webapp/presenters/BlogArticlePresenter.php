@@ -75,7 +75,7 @@ class BlogArticlePresenter extends UI\Presenter
 		$template->captchaImageUrl = $captcha->getImage($hash);
 		// better to set the form action to anchor, user don't have to scroll for preview and
 		// for the error correction
-		$form->setAction($form->getAction() . "#newComment");
+		$form->setAction($form->getAction() . "#addComment");
 
 		$template->pageSubTitle = $this->article->title;
 	}
