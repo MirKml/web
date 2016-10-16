@@ -3,7 +3,7 @@
     {foreach $articles as $article}
     <article>
         <header>
-            <p class="meta">{$article->posted|date:"j. m. Y"} - <a href="{link BlogArticle: $article->titleUrl}#comments">Komentáře ({$article->commentsCount})</a>
+            <p class="meta">{$article->posted|date:"j. n. Y"} - <a href="{link BlogArticle: $article->titleUrl}#comments">Komentáře ({$article->commentsCount})</a>
                 {foreach $articlesRelation->getCategoriesForArticle($article) as $category}
                 <a class="label" href="">{$category->name}</a>
                 {/foreach}

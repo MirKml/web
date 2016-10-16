@@ -1,0 +1,8 @@
+<p class="meta">
+    {if $previous}
+    <a class="basic-alignment left" href="{plink BlogArticle: $previous->titleUrl}" title="Previous article">{$previous->title}</a>
+    {/if}
+    {if $next}
+    <a class="basic-alignment right" href="{plink BlogArticle: $next->titleUrl}" title="Next article">{$next->title}</a>
+    {/if}
+</p>

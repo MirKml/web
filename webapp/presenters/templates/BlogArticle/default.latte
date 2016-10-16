@@ -7,9 +7,9 @@
     <article class="hentry" role="article">
         <!-- header for each post -->
         <header>
-            <p class="meta">{$article->posted|date:"j. m. Y"}{if $comments} - <a href="#comments">Komentáře ({count($comments)})</a>{/if}
+            <p class="meta">{$article->posted|date:"j. n. Y"}{if $comments} - <a href="#comments">Komentáře ({count($comments)})</a>{/if}
                 {foreach $articlesRelation->getCategoriesForArticle($article) as $category}
-                    <a class="label" href="">{$category->name}</a>
+                    <a class="label" href="{link BlogCategory: $category->titleURL}">{$category->name}</a>
                 {/foreach}
             </p>
             <h1 class="entry-title">
@@ -23,21 +23,17 @@
 
         <footer>
             <p class="meta">
-                <span class="byline author vcard">Posted by <span class="fn">{$article->authorName}</span></span>
+                <span class="byline author vcard"><img src="/images/writer_male_light_32.png" alt=""> <span class="fn">{$article->authorName}</span></span>
                 <!-- can't put the .Date.Format inside the datetime attribute because of double quotes, so it's outside -->
-                <time>{$article->posted|date:"j. m. Y"}</time>
+                <time>{$article->posted|date:"j. n. Y"}</time>
                 <span class="categories" n:foreach="$articlesRelation->getCategoriesForArticle($article) as $category">
-                    <a class="category" href="">{$category->name}</a>
+                    <a class="category" href="{link BlogCategory: $category->titleURL}">{$category->name}</a>
                 </span>
             </p>
 
             <!-- For sharing stuff -->
             <!-- <div class="sharing"> </div> -->
-
-            <p class="meta">
-                <a class="basic-alignment left" href="" title="Previous">Previous</a>
-                <a class="basic-alignment right" href="" title="Previous">Next</a>
-            </p>
+            {control previousNextArticle}
         </footer>
     </article>
 
@@ -53,7 +49,7 @@
             <article>
                 <header>
                     {if $comment->getAuthorWeb()}<a href="{$comment->getAuthorWeb()}">{$comment->name}</a>
-                    {else}{$comment->name}{/if} - {$comment->posted|date:"j.m. Y H:i"}
+                    {else}{$comment->name}{/if} - {$comment->posted|date:"j. n. Y H:i"}
                 </header>
                 <p>{$comment->getHtmlMessage()|noescape}</p>
             </article>

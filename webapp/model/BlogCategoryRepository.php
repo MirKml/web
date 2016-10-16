@@ -25,4 +25,9 @@ class BlogCategoryRepository
 				and categoryarticle.article_id IN (%i)", $entryIDs)
 			->fetchAssoc("article_id[]");
 	}
+
+	public function getAll()
+	{
+		return $this->db->fetchAll("select * from category");
+	}
 }

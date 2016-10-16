@@ -72,4 +72,35 @@ class BlogArticleRepository
 			where status = 'published'");
 	}
 
+	/**
+	 * @param BlogArticle $current
+	 * @return BlogArticle|void
+	 */
+	public function getPrevious(BlogArticle $current)
+	{
+		$articleRow = $this->db->fetch("select id, title, posted, titleUrl, status
+			from article
+			where posted < %t", $current->posted, "
+				and status = 'published'
+			order by posted desc
+			limit 1");
+		if (!$articleRow) return;
+		return new BlogArticle($articleRow);
+	}
+
+	/**
+	 * @param BlogArticle $current
+	 * @return BlogArticle|void
+	 */
+	public function getNext(BlogArticle $current)
+	{
+		$articleRow = $this->db->fetch("select id, title, posted, titleUrl, status
+			from article
+			where posted > %t", $current->posted, "
+				and status = 'published'
+			order by posted asc
+			limit 1");
+		if (!$articleRow) return;
+		return new BlogArticle($articleRow);
+	}
 }

@@ -1,0 +1,8 @@
+<section class="odd">
+    <h1>Katogorie</h1>
+    {foreach $categories as $category}
+    <li>
+        <a href="{plink BlogCategory: $category->titleURL}" title="{$category->name}">{$category->name}</a>
+    </li>
+    {/foreach}
+</section>

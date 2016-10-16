@@ -6,6 +6,7 @@ use Mirin\Model;
 
 class IndexPresenter extends Nette\Application\UI\Presenter
 {
+	use Layout;
 
 	/**
 	 * @var Nette\Utils\Paginator

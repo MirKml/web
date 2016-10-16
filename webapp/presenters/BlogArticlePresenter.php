@@ -4,9 +4,11 @@ namespace Mirin\Presenters;
 use Nette;
 use Nette\Application\UI;
 use Mirin\Model;
+use Mirin\Components;
 
 class BlogArticlePresenter extends UI\Presenter
 {
+	use Layout;
 
 	/**
 	 * @inject
@@ -138,5 +140,11 @@ class BlogArticlePresenter extends UI\Presenter
 		$form->addSubmit("save", "Ulož");
 
 		return $form;
+	}
+
+	protected function createComponentPreviousNextArticle()
+	{
+		return new Components\PreviousNextArticle($this->blogArticleRepository,
+			$this->article);
 	}
 }

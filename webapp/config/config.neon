@@ -22,4 +22,6 @@ services:
 	- Mirin\Model\BlogArticleRepository
 	- Mirin\Model\BlogCategoryRepository
 	- Mirin\Model\BlogCommentRepository
+
+	- Mirin\Components\ICategoriesFactory
 	router: Mirin\RouterFactory::createRouter

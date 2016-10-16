@@ -85,3 +85,17 @@ pre.codeOutput  {
 .commentForm textarea {
     height: 7em;
 }
+
+.author img {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    box-sizing: content-box;
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .author img {
+        display: inherit;
+    }
+}
