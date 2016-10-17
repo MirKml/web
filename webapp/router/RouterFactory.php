@@ -16,6 +16,7 @@ class RouterFactory
 		$router[] = new Routers\Route("/", "Index:default");
 		$router[] = new Routers\Route("/<slug [a-z0-9_-]+>", "BlogArticle:default");
 		$router[] = new Routers\Route("/category/<slug [a-z0-9-]+>", "BlogCategory:default");
+		$router[] = new Routers\Route("/rss.xml", "Rss:default");
 		return $router;
 	}
 

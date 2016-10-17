@@ -66,6 +66,20 @@ class BlogArticle
 		return $this->htmlText = $renderer->getOutput();
 	}
 
+	public function getRssContent($baseUri, $articleUri)
+	{
+		$htmlText = $this->getHtmlText();
+
+		// resolves local links like <a href="/homepage/blog">link</a> into
+		// <a href="http://mysite/homepage/blog">link</a>
+		$htmlText = preg_replace("/\s(href|src)=\"\//"," $1=\"$baseUri/", $htmlText);
+
+		// resolves local links for the footnoteslike <a href="#fnt">link</a> into
+		// <a href="http://mysite/homepage/blog#fnt">link</a>
+		$htmlText = preg_replace("/<a href=\"#/","<a href=\"$articleUri#", $htmlText);
+		return self::escapeCodeTagContent($htmlText);
+	}
+
 	private function getWikiParser()
 	{
 		if ($this->wikiParser) return $this->wikiParser;

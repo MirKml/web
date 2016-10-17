@@ -30,4 +30,13 @@ class BlogCategoryRepository
 	{
 		return $this->db->fetchAll("select * from category");
 	}
+
+	/**
+	 * @param string $slug
+	 * @return object|bool
+	 */
+	public function getBySlug($slug)
+	{
+		return $this->db->fetch("select * from category where titleURL = %s", $slug);
+	}
 }

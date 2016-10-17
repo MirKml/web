@@ -8,6 +8,8 @@ class BlogArticleRepository
 {
 
 	const ITEMS_PER_PAGE = 5;
+	const ITEMS_IN_CATEGORY_PER_PAGE = 10;
+	const ITEMS_IN_RSS_LIST = 10;
 
 	/**
 	 * @var Dibi\Connection
@@ -22,7 +24,7 @@ class BlogArticleRepository
 	/**
 	 * List of articles with comments and authors
 	 * @param Paginator $paginator
-	 * @return array
+	 * @return BlogArticle[]
 	 */
 	public function getList(Paginator $paginator)
 	{
@@ -40,6 +42,27 @@ class BlogArticleRepository
 			order by article.posted desc
 			%lmt %ofs", $paginator->getItemsPerPage(), $paginator->getOffset())
 				 as $articleRow) {
+
+			$articles[] = new BlogArticle($articleRow);
+		}
+
+		return $articles;
+	}
+
+	/**
+	 * gets article list for rss feed
+	 * @return BlogArticle[]
+	 */
+	public function getRssList()
+	{
+		$articles = [];
+		foreach ($this->db->query("
+			select article.title, article.titleUrl, article.posted, article.text,
+				article.format
+			from article
+			where article.status = 'published'
+			order by article.posted desc
+			%lmt", self::ITEMS_IN_RSS_LIST) as $articleRow) {
 
 			$articles[] = new BlogArticle($articleRow);
 		}
@@ -102,5 +125,42 @@ class BlogArticleRepository
 			limit 1");
 		if (!$articleRow) return;
 		return new BlogArticle($articleRow);
+	}
+
+	/**
+	 * @param object $category
+	 * @param Paginator $paginator
+	 * @return BlogArticle[]
+	 */
+	public function getInCategoryList($category, Paginator $paginator)
+	{
+		$articles = [];
+		foreach ($this->db->query("
+			select article.id, article.title, article.titleUrl, article.posted
+			from article
+			inner join categoryarticle on categoryarticle.category_id = %i", $category->id, "
+				and categoryarticle.article_id = article.id
+			where article.status = 'published'
+			order by article.posted desc
+			%lmt %ofs", $paginator->getItemsPerPage(), $paginator->getOffset())
+				 as $articleRow) {
+
+			$articles[] = new BlogArticle($articleRow);
+		}
+
+		return $articles;
+	}
+
+	/**
+	 * @param object $category
+	 * @return int
+	 */
+	public function getInCategoryPublishedCount($category)
+	{
+		return $this->db->fetchSingle("select count(article_id)
+			from article
+			inner join categoryarticle on categoryarticle.category_id = %i", $category->id, "
+				and categoryarticle.article_id = article.id
+			where article.status = 'published'");
 	}
 }

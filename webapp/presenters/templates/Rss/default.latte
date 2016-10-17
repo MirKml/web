@@ -1,0 +1,22 @@
+{contentType application/xml}
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Mirin's blog</title>
+        <description>Blog nejen o programování</description>
+        <lastBuildDate>{$latestArticlePosted|date:DATE_RSS}</lastBuildDate>
+        <link>{link //:Index:}</link>
+        <language>cs</language>
+
+        <item n:foreach="$articles as $article">
+            <title>{$article->title}</title>
+            <pubDate>{$article->posted|date:DATE_RSS}</pubDate>
+            <link>{link //:BlogArticle: $article->titleUrl}</link>
+            <description>{$article->getDescription()|striptags}</description>
+            <content:encoded><![CDATA[
+{$article->getRssContent($control->link("//:Index:"), $control->link("//:BlogArticle:", $article->titleUrl))|noescape}
+            ]]></content:encoded>
+        </item>
+    </channel>
+</rss>

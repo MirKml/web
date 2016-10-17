@@ -4,6 +4,8 @@ application:
 	errorPresenter: Error
 	mapping:
 		*: Mirin\*Module\Presenters\*Presenter
+php:
+	intl.default_locale: cs-CZ
 
 session:
 	expiration: 14 days

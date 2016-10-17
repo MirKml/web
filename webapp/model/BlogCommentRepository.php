@@ -55,6 +55,15 @@ class BlogCommentRepository
 		return new BlogComment(new Dibi\Row($comment));
 	}
 
+	/**
+	 * Gets count of comments for the article
+	 * @param BlogArticle $article
+	 */
+	public function getCountForArticle(BlogArticle $article)
+	{
+		return $this->db->fetchSingle("select count(*) from comment where article_id = %i", $article->id);
+	}
+
 	public function insert(BlogComment $comment)
 	{
 		$this->db->query("insert into comment", [

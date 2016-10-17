@@ -3,51 +3,32 @@
     <article role="article">
         <header>
             <h1 class="entry-title">
-                Kategorie: Testovací
+                Kategorie: {$category->name}
             </h1>
         </header>
 
-        <div id="blog-archives" class="category">
+        <div n:inner-foreach="$articles as $article" id="blog-archives" class="category">
             <h2>
-                2006
+                {$article->posted|date:"Y"}
             </h2>
             <article>
                 <h1>
-                    <a href="" title="titulek">První článek</a>
+                    <a href="{link BlogArticle: $article->titleUrl}" title="{$article->title}">{$article->title}</a>
                 </h1>
                 <time>
-                    <span class="day">22</span>
-                    <span class="month">Duben</span>
+                    <span class="day">{$article->posted|date:"j"}</span>
+                    <span class="month">{$monthFormatter->format($article->posted)}</span>
                 </time>
                 <footer>
-                    <span class="categories">
-                        v kategoriích :
-                        <a class="category" href="">Prvni</a>
-                        <a class="category" href="">Druha</a>
-                    </span>
-                </footer>
-            </article>
-
-            <h2>
-                2006
-            </h2>
-            <article>
-                <h1>
-                    <a href="" title="titulek">První článek</a>
-                </h1>
-                <time>
-                    <span class="day">22</span>
-                    <span class="month">Duben</span>
-                </time>
-                <footer>
-                    <span class="categories">
-                        v kategoriích :
-                        <a class="category" href="">Prvni</a>
-                        <a class="category" href="">Druha</a>
+                    <span n:inner-foreach="$articlesRelation->getCategoriesForArticle($article) as $articleCategory" class="categories">
+                        {if $iterator->isFirst()}kategorie:{/if}
+                        <a class="category" href="{link BlogCategory: $articleCategory->titleURL}">{$articleCategory->name}</a>
                     </span>
                 </footer>
             </article>
         </div>
+
+        {control pagination}
     </article>
 </div>
 {/block}
