@@ -94,8 +94,23 @@ pre.codeOutput  {
     display: none;
 }
 
+img.smiley {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    box-sizing: content-box;
+}
+
 @media only screen and (min-width: 768px) {
     .author img {
         display: inherit;
     }
 }
+/* wider padding for article title in the category lists, necessary
+  for czech month names */
+@media only screen and (min-width: 550px) {
+    #blog-archives article {
+        padding-left: 5.8em;
+    }
+}
+

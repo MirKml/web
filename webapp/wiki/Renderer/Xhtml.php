@@ -422,7 +422,7 @@ class WikiText_Renderer_Xhtml extends WikiText_Renderer
     {
         if (array_key_exists($smiley,self::$_smileys)) {
             $title = self::_xmlEntities(self::$_smileys[$smiley]);
-            $this->_doc.='<img src="'.$this->_baseUrl.'/images/smileys/'.self::$_smileys[$smiley]
+            $this->_doc.='<img class="smiley" src="'.$this->_baseUrl.'/images/smileys/'.self::$_smileys[$smiley]
                 .'" alt="'
                 .self::_xmlEntities($smiley)
                 .'" />';
