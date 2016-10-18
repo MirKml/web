@@ -12,7 +12,7 @@ RewriteEngine On
 
 # redirect from non www. to www domain
 RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ %{REQUEST_SCHEME}://www.%{HTTP_HOST}$1 [R=301,L]
+RewriteRule ^(.*)$ %{REQUEST_SCHEME}://www.%{HTTP_HOST}/$1 [R=301,L]
 
 RewriteRule /\.|^\.(?!well-known/) - [F]
 
