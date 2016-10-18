@@ -1,5 +1,5 @@
 # base image for most pilulka.cz web based projects
-FROM php:5.6-apache
+FROM php:7.0-apache
 
 MAINTAINER miroslav kubelik <koubel@seznam.cz>
 
@@ -26,7 +26,7 @@ RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install xmlrpc \
     && docker-php-ext-install sysvsem
 
-RUN pecl install redis-2.2.8 \
+RUN pecl install redis\
     && docker-php-ext-enable redis
 
 # setup Composer
