@@ -1,35 +1,35 @@
 <?php
 namespace Mirin\Presenters;
-
 use Nette;
-use Tracy\ILogger;
+use Tracy;
 
-class ErrorPresenter implements Nette\Application\IPresenter
+class ErrorPresenter extends Nette\Application\UI\Presenter
 {
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(ILogger $logger)
-	{
-		$this->logger = $logger;
-	}
-
 	/**
-	 * @return Nette\Application\IResponse
+	 * @inject
+	 * @var Tracy\ILogger
 	 */
-	public function run(Nette\Application\Request $request)
-	{
-		$e = $request->getParameter('exception');
+	public $logger;
 
-		if ($e instanceof Nette\Application\BadRequestException) {
-			list($module, , $sep) = Nette\Application\Helpers::splitName($request->getPresenterName());
-			return new Nette\Application\Responses\ForwardResponse($request->setPresenterName($module . $sep . 'Error4xx'));
+	public function renderDefault(\Exception $exception)
+	{
+		$template = $this->getTemplate();
+
+		if ($exception instanceof Nette\Application\BadRequestException) {
+			$template->description = "Stránka nenalezena";
+			$template->message = "Požadovaná stránka nebyla nalezena."
+				. " Zkontrolujte prosím zda vámi zadaná adresa je správná."
+				. "<p>Pokud ne, zkuste to na <a href=\"/\">úvodní stránce</a>, nebo"
+				. " zkuste stránku najít např. přes váš oblíbený vyhledávač"
+				. "</p>";
+			$template->type = "error " . $exception->getCode() . " - page not found";
+			return;
 		}
 
-		$this->logger->log($e, ILogger::EXCEPTION);
-		return new Nette\Application\Responses\CallbackResponse(function () {
-			require __DIR__ . '/templates/Error/500.phtml';
-		});
+		$this->logger->log($exception, Tracy\ILogger::EXCEPTION);
+		$template->description = "Server Error";
+		$template->message = "We're sorry! The server encountered an internal error "
+			. "was unable to complete your request. Please try again later.";
+		$template->type = "error 500 - server error";
 	}
-
 }

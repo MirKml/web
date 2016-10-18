@@ -1,4 +1,4 @@
-pre.codeOutput  {
+pre.codeOutput, pre.code  {
     background:#F9F9F9 url("/images/code.gif") right bottom no-repeat;
     margin-bottom: 0.5em;
     color: #555;
