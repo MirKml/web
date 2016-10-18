@@ -37,6 +37,11 @@ ADD site.apache.conf /etc/apache2/sites-available/www.mirin.dkl.conf
 RUN a2ensite www.mirin.dkl
 RUN a2enmod rewrite
 
+# correct timezone
+ENV TZ=Europe/Prague
+RUN echo $TZ | tee /etc/timezone
+RUN dpkg-reconfigure --frontend noninteractive tzdata
+
 # workaround for the shared folders in virtualbox guest
 # see https://github.com/docker-library/mysql/issues/99
 # GID - 999 is determined in the guest vm by $ getent group vboxsf

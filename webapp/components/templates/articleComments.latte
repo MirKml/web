@@ -5,7 +5,7 @@
             <p><i class="fa fa-info fa-2" aria-hidden="true"></i> {$flash->message}</p>
         {/foreach}
     {/if}
-    <h2>Komentáře (2){if $commentsOpen} <a href="#addComment">Přidej komentář</a>{/if}</h2>
+    <h2>Komentáře ({count($comments)}){if $commentsOpen} <a href="#addComment">Přidej komentář</a>{/if}</h2>
     <ol n:inner-foreach="$comments as $comment">
         <li class="comment">
             <article>
