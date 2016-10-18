@@ -61,6 +61,21 @@ It's necessary to call these under root.
 When new directory under ```temp``` is created, it's necessary create it with the permissions ```2775```
 for correct setgid bit usage.
 
+Settings for rotate logs
+-------
+App is installed e.g. in ```/var/www/html/mirin.cz```, so add this one into
+```/etc/logrotate.d/mirin.cz```
+
+    /var/www/mirin.cz/log/*.log /var/www/mirin.cz/log/*.html {
+      rotate 12
+      monthly
+      compress
+      missingok
+      notifempty
+    }
+
+Then check the ```/var/lib/logrotate/status```
+
 License
 -------
 - GPL 3
