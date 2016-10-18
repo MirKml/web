@@ -3,8 +3,12 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
 
+// "192.168.56.1" is the IP for the virtualbox host IP address
 $configurator->setDebugMode(["127.0.0.1", "192.168.56.1"]); // enable for your remote IP
-$configurator->enableDebugger(__DIR__ . '/../log');
+// enable only when there isn't obvious error reason from normal apache log
+// because tracy logs aren't rotated
+// $configurator->enableDebugger(__DIR__ . '/../log');
+$configurator->enableDebugger();
 
 $configurator->setTimeZone('Europe/Prague');
 $configurator->setTempDirectory(__DIR__ . '/../temp');
