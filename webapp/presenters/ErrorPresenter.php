@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Presenters;
+namespace Mirin\Presenters;
 
 use Nette;
 use Tracy\ILogger;
