@@ -1,9 +1,0 @@
-parameters:
-
-dibi:
-	host: db
-	username: root
-	password: localdb
-	database: mirin
-	lazy: TRUE
-

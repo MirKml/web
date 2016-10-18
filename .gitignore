@@ -5,6 +5,6 @@ dbdata
 dbdumps
 !.gitignore
 !.htaccess
-app/config/config.local.neon
+webapp/config/config.local.neon
 composer.lock
 .idea
