@@ -54,14 +54,18 @@ Use setgid bit and appropriate group for the write access for developer and web 
     $ cd appdir
     $ find temp -type d | xargs chmod -c 2775
     # with sudo e.g
-    # $ find temp -type d | xargs sudo chmod -c 2775
-    $ find temp -type f | xargs chmod -c 2664
+    $ find temp -type d | xargs sudo chmod -c 2775
+    
+    $ find temp -type f | xargs chmod -c 664
     $ chown -Rc www-data:developers temp 
+    
+    # maybe .htaccess can be written for owner only,
+    # but maybe for developers to it's up to you
     $ find temp -name ".htaccess" | xargs chmod -c 644
 
-    # chmod -c 2775 log
+    $ chmod -c 2775 log
+    $ chmod -Rc 664 log/*
     $ chown -Rc www-data:developers log 
-    $ find log -name ".htaccess" | xargs chmod -c 644
     
 It's necessary to call these under root.
 When new directory under ```temp``` is created, it's necessary create it with the permissions ```2775```
