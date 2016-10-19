@@ -47,16 +47,22 @@ to add the ```www.mirin.dkl``` into the Windows hosts file because container web
 is the name based virtual host.
 Database administration is directly on the 192.168.56.2:8081 url
 
-Settings for temp directory
+Settings for temp, log directory
 -------
 Use setgid bit and appropriate group for the write access for developer and web server.
 
     $ cd appdir
     $ find temp -type d | xargs chmod -c 2775
+    # with sudo e.g
+    # $ find temp -type d | xargs sudo chmod -c 2775
     $ find temp -type f | xargs chmod -c 2664
     $ chown -Rc www-data:developers temp 
     $ find temp -name ".htaccess" | xargs chmod -c 644
 
+    # chmod -c 2775 log
+    $ chown -Rc www-data:developers log 
+    $ find log -name ".htaccess" | xargs chmod -c 644
+    
 It's necessary to call these under root.
 When new directory under ```temp``` is created, it's necessary create it with the permissions ```2775```
 for correct setgid bit usage.
