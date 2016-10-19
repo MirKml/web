@@ -63,8 +63,7 @@ for correct setgid bit usage.
 
 Settings for rotate logs
 -------
-App is installed e.g. in ```/var/www/html/mirin.cz```, so add this one into
-```/etc/logrotate.d/mirin.cz```
+App is installed e.g. in ```/var/www/html/mirin.cz```, so add this one into ```/etc/logrotate.d/mirin.cz```
 
     /var/www/mirin.cz/log/*.log /var/www/mirin.cz/log/*.html {
         rotate 7
@@ -77,4 +76,4 @@ Then check the ```/var/lib/logrotate/status```
 
 License
 -------
-- GPL 3
+[GPL 3](https://www.gnu.org/licenses/gpl-3.0.en.html)
