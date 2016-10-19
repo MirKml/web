@@ -57,7 +57,7 @@ class BlogArticleRepository
 	{
 		$articles = [];
 		foreach ($this->db->query("
-			select article.title, article.titleUrl, article.posted, article.text,
+			select article.id, article.title, article.titleUrl, article.posted, article.text,
 				article.format
 			from article
 			where article.status = 'published'
