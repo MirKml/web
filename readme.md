@@ -59,8 +59,8 @@ Use setgid bit and appropriate group for the write access for developer and web 
     $ find temp -type f | xargs chmod -c 664
     $ chown -Rc www-data:developers temp 
     
-    # maybe .htaccess can be written for owner only,
-    # but maybe for developers to it's up to you
+    # maybe .htaccess can be writtable for owner only,
+    # but maybe for developers also, it's up to you
     $ find temp -name ".htaccess" | xargs chmod -c 644
 
     $ chmod -c 2775 log
