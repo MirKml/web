@@ -12,6 +12,8 @@
 	],
 	"require": {
 		"php": "^7.0",
+		"ext-intl" : "*",
+		"ext-pdo_sqlite" : "*",
 		"nette/application": "^2.4",
 		"nette/bootstrap": "^2.4.1",
 		"nette/caching": "^2.5",
