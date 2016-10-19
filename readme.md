@@ -67,11 +67,10 @@ App is installed e.g. in ```/var/www/html/mirin.cz```, so add this one into
 ```/etc/logrotate.d/mirin.cz```
 
     /var/www/mirin.cz/log/*.log /var/www/mirin.cz/log/*.html {
-      rotate 12
-      monthly
-      compress
-      missingok
-      notifempty
+        rotate 7
+        weekly
+        compress
+        missingok
     }
 
 Then check the ```/var/lib/logrotate/status```
