@@ -106,11 +106,16 @@ img.smiley {
         display: inherit;
     }
 }
+
+#blog-archives h2 {
+    display: inline-block;
+}
+
 /* wider padding for article title in the category lists, necessary
   for czech month names */
 @media only screen and (min-width: 550px) {
     #blog-archives article {
-        padding-left: 5.8em;
+        padding-left: 6em;
     }
 }
 
