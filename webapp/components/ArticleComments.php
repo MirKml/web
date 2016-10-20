@@ -116,7 +116,7 @@ class ArticleComments extends UI\Control
 			->setRequired("Vyplňte email")
 			->addRule(UI\Form::EMAIL, "Nerozpoznán platný email, zkuste to znovu");
 		$form->addText("www", "Váš web");
-		$form->addTextArea("message", "Tvůj komentář")
+		$form->addTextArea("message", "Tvůj komentář (povoleno <a href>, <pre>)")
 			->setRequired("Vyplňte komentář");
 		$form->addSubmit("preview", "Náhled");
 		$form->onSuccess[] = [$this, "handleCommentForm"];
