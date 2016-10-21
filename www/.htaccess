@@ -30,3 +30,5 @@ RedirectMatch ^/media/(.*) http://vhost.mirin.cz/media/$1
 RedirectMatch permanent ^/projects/ /about
 RedirectMatch permanent ^/blog/?$ /
 RedirectMatch permanent ^/blog/feed$ /rss.xml
+# old english urls
+RedirectMatch permanent ^/en/(.*) /$1
