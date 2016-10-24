@@ -1,0 +1,55 @@
+{block cssFiles}
+    <link href="/css/admin/signin.css" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+{/block}
+{block jsFiles}
+    <script type="text/javascript" src="/js/md5.min.js"></script>
+{/block}
+
+{block body}
+    <div class="container">
+        <div class="row main">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Mirin.cz - Administrace</h1>
+                    <hr/>
+                </div>
+            </div>
+            <div class="main-login main-center">
+                {form logInForm class => "form-horizontal"}
+                    {if $control["logInForm"]->hasErrors()}
+                        <div class="alert alert-warning">
+                            {foreach $control["logInForm"]->getErrors() as $error}
+                                <p><strong>Chyba!</strong> {$error}</p>
+                            {/foreach}
+                        </div>
+                    {/if}
+                    <div class="form-group">
+                        {label username class=> "cols-sm-2 control-label"}
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                {input username class => "form-control", placeholder => "Jméno uživatele"}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {label passOrig class=> "cols-sm-2 control-label"}
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                {input passOrig class => "form-control", placeholder => "Heslo"}
+                            </div>
+                        </div>
+                    </div>
+
+                    {input passHashed}
+                    <div class="form-group ">
+                        {input logIn class => "btn btn-primary btn-lg btn-block login-button"}
+                    </div>
+                {/form}
+            </div>
+        </div>
+    </div>
+{/block}
