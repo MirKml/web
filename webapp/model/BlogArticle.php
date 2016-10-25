@@ -1,6 +1,5 @@
 <?php
 namespace Mirin\Model;
-
 use Dibi;
 
 class BlogArticle

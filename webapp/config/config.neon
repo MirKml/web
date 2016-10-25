@@ -24,6 +24,9 @@ services:
 	- Mirin\Model\BlogArticleRepository
 	- Mirin\Model\BlogCategoryRepository
 	- Mirin\Model\BlogCommentRepository
+	- Mirin\Model\BlogAuthorRepository
 
 	- Mirin\Components\ICategoriesFactory
 	router: Mirin\RouterFactory::createRouter
+	authenticator: Mirin\BlogAuthorAuthenticator
+

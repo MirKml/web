@@ -1,6 +1,7 @@
 <?php
 namespace Mirin\AdminModule\Presenters;
 use Nette\Application\UI;
+use Nette\Security;
 use Mirin\AdminModule;
 
 class LogInPresenter extends UI\Presenter
@@ -17,12 +18,26 @@ class LogInPresenter extends UI\Presenter
 		$this["logInForm"]["loginToken"]->setValue($token);
 	}
 
+	/**
+	 * Process the login form and try to log particular use in.
+	 * @param UI\Form $form
+	 */
 	public function handleLogInForm(UI\Form $form)
 	{
 		$token = $form["loginToken"]->getValue();
-		dump($token == $this->getSession("login")->loginToken);
-		dump(hash_hmac("md5", "test", "mirin.cz" . $token));
-		dump($form["passHashed"]->getValue());
+		if ($token != $this->getSession("login")->loginToken) {
+			$form->addError("token verification failed, maybe session hijacking");
+			return;
+		}
+
+		try {
+			$this->getUser()->login($form["username"]->getValue(), $token, $form["passHashed"]->getValue());
+		} catch (Security\AuthenticationException $exception) {
+			$form->addError($exception->getMessage());
+			return;
+		}
+
+		$this->redirect(":Admin:");
 	}
 
 	/**
