@@ -16,10 +16,9 @@ class BlogAuthorAuthenticator implements Nette\Security\IAuthenticator
 	}
 
 	/**
-	 * Performs an authentication
-	 * and returns IIdentity on success or throws AuthenticationException
-	 * @return Nette\Security\IIdentity
+	 * Performs an authentication by request response with token
 	 * @throws Nette\Security\AuthenticationException
+	 * @return Nette\Security\IIdentity
 	 */
 	public function authenticate(array $credentials)
 	{
@@ -35,6 +34,8 @@ class BlogAuthorAuthenticator implements Nette\Security\IAuthenticator
 			throw new Nette\Security\AuthenticationException("Invalid password.",
 				Nette\Security\IAuthenticator::INVALID_CREDENTIAL);
 		}
+
+		return new Nette\Security\Identity($author->id);
 	}
 }
 

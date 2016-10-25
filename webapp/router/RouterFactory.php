@@ -17,9 +17,10 @@ class RouterFactory
 		$router[] = new Routers\Route("/about", "About:default");
 		$router[] = new Routers\Route("/blog/<slug [a-z0-9_-]+>", "BlogArticle:default");
 		$router[] = new Routers\Route("/blog/category/<slug [a-z0-9-]+>", "BlogCategory:default");
-		$router[] = new Routers\Route("/admin/login", "Admin:LogIn:");
-		$router[] = new Routers\Route("/admin/articles", "Admin:Articles:");
-		$router[] = new Routers\Route("/admin/theme", "Admin:Theme:");
+		$router[] = new Routers\Route("/admin/login", "Admin:LogIn:default");
+		$router[] = new Routers\Route("/admin/logout", "Admin:LogIn:logOut");
+		$router[] = new Routers\Route("/admin/articles", "Admin:Articles:default");
+		$router[] = new Routers\Route("/admin/theme", "Admin:Theme:default");
 		$router[] = new Routers\Route("/rss.xml", "Rss:default");
 		return $router;
 	}

@@ -6,16 +6,35 @@ use Mirin\AdminModule;
 
 class LogInPresenter extends UI\Presenter
 {
+	public function actionDefault()
+	{
+		if ($this->getUser()->isLoggedIn()) {
+			$this->setView("isLoggedIn");
+			return;
+		}
+	}
+
 	public function renderDefault()
 	{
+
 		$template = $this->getTemplate();
-		$template->cssFile = "signin.css";
 		$template->subTitle = "Přihlášení";
 
 		if ($this->getSession()->isStarted()) $this->getSession()->start();
 		$token = uniqid("lgin");
 		$this->getSession("login")->loginToken = $token;
 		$this["logInForm"]["loginToken"]->setValue($token);
+	}
+
+	public function renderIsLoggedIn()
+	{
+		$this->getTemplate()->subTitle = "Již přihlášen";
+	}
+
+	public function renderLogOut()
+	{
+		$this->getTemplate()->subTitle = "Odhlášení";
+		$this->getUser()->logout();
 	}
 
 	/**
@@ -37,7 +56,7 @@ class LogInPresenter extends UI\Presenter
 			return;
 		}
 
-		$this->redirect(":Admin:");
+		$this->redirect("Articles:");
 	}
 
 	/**

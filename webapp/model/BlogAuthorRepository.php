@@ -22,4 +22,13 @@ class BlogAuthorRepository
 	{
 		return $this->db->fetch("select * from author where username = %s", $username);
 	}
+
+	/**
+	 * @param int $id
+	 * @return object
+	 */
+	public function getById($id)
+	{
+		return $this->db->fetch("select * from author where id = %i", $id);
+	}
 }

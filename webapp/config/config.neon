@@ -8,7 +8,8 @@ php:
 	intl.default_locale: cs-CZ
 
 session:
-	expiration: 14 days
+	expiration: 1 day
+	savePath: %tempDir%/sessions
 
 extensions:
 	dibi: Dibi\Bridges\Nette\DibiExtension22
@@ -25,8 +26,10 @@ services:
 	- Mirin\Model\BlogCategoryRepository
 	- Mirin\Model\BlogCommentRepository
 	- Mirin\Model\BlogAuthorRepository
-
 	- Mirin\Components\ICategoriesFactory
+
+	- Mirin\AdminModule\Model\ArticleRepository
+
 	router: Mirin\RouterFactory::createRouter
 	authenticator: Mirin\BlogAuthorAuthenticator
 
