@@ -1,0 +1,9 @@
+<div class="col-sm-3">
+    <ul class="nav nav-pills nav-stacked">
+        {foreach $items as $item}
+        <li{if $item->active} class="active"{/if}>
+            <a href="{$item->url}">{if $item->glyphicon}<i class="glyphicon {$item->glyphicon}">{/if}</i> {$item->name}</a>
+        </li>
+        {/foreach}
+    </ul>
+</div>

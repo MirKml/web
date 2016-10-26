@@ -1,36 +1,11 @@
 {block body}
-<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{link Articles:}">Administrace</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle"><i class="glyphicon glyphicon-user"></i> {$user->name}</a>
-                </li>
-                <li><a href="{link LogIn:logOut}"><i class="glyphicon glyphicon-lock"></i> Odhlásit</a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- /container -->
-</div>
+{include ../header.latte}
 <!-- /Header -->
 
 <!-- Main -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><i class="glyphicon glyphicon-list"></i> Články</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> Komentáře</a></li>
-            </ul>
-        </div>
+        {control menu}
         <!-- /col-3 -->
         <div class="col-sm-9">
             <strong><i class="glyphicon glyphicon-list"></i> Články</strong>
@@ -52,7 +27,7 @@
                             <tbody>
                             {foreach $articles as $article}
                             <tr>
-                                <td>{$article->title}</td>
+                                <td><a href="{link EditArticle: $article->id}">{$article->title}</a></td>
                                 <td>{$article->posted|date:"Y-m-d H:i"}</td>
                                 <td>{$article->status}</td>
                             </tr>
@@ -64,10 +39,12 @@
                 </div>
             </div>
         </div>
-        <!--/col-span-9-->
+        <!--/col-9-->
     </div>
 </div>
 <!-- /Main -->
 
-<footer class="text-center">This Bootstrap 3 dashboard layout is based on <a href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a></footer>
+<footer class="text-center">
+    This Bootstrap 3 dashboard layout is based on <a href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a>
+</footer>
 {/block}

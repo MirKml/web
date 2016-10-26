@@ -1,0 +1,30 @@
+{block jsFiles}
+<script type="text/javascript" src="/js/netteForms.js"></script>
+{/block}
+{block body}
+{include ../header.latte}
+<!-- /Header -->
+
+<!-- Main -->
+<div class="container-fluid">
+    <div class="row">
+        {control menu}
+        <!-- /col-3 -->
+        <div class="col-sm-9">
+            <strong><i class="glyphicon glyphicon-list"></i> {$article->title}<strong>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-12">
+                    {control articleForm}
+                </div>
+            </div>
+        </div>
+        <!--/col-span-9-->
+    </div>
+</div>
+<!-- /Main -->
+
+<footer class="text-center">This Bootstrap 3 dashboard layout is based on <a href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a></footer>
+{/block}

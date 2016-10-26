@@ -1,0 +1,21 @@
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{link Articles:}">Administrace</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle"><i class="glyphicon glyphicon-user"></i> {$currentUser->name}</a>
+                </li>
+                <li><a href="{link LogIn:logOut}"><i class="glyphicon glyphicon-lock"></i> Odhlásit</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /container -->
+</div>

@@ -31,4 +31,15 @@ class BlogAuthorRepository
 	{
 		return $this->db->fetch("select * from author where id = %i", $id);
 	}
+
+	/**
+	 * Gets all author names as array with ID as key for each one.
+	 * It's mostly used for select boxes with authors.
+	 * @return array
+	 */
+	public function getAllForSelectBox()
+	{
+		return $this->db->query("select * from author")
+			->fetchAssoc("id|=name");
+	}
 }

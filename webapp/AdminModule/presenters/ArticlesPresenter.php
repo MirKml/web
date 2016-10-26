@@ -2,6 +2,7 @@
 namespace Mirin\AdminModule\Presenters;
 use Nette;
 use Mirin;
+use Mirin\AdminModule\Components;
 
 class ArticlesPresenter extends Nette\Application\UI\Presenter
 {
@@ -28,7 +29,7 @@ class ArticlesPresenter extends Nette\Application\UI\Presenter
 		if (!$this->getUser()->isLoggedIn()) {
 			$this->redirect("LogIn:");
 		}
-		$user = $this->authorRepository->getById($this->getUser()->getId());
+		$currentUser = $this->authorRepository->getById($this->getUser()->getId());
 
 		$paginatorFactory = new Mirin\Presenters\PaginatorFactory($this->getHttpRequest());
 		$this->paginator = $paginatorFactory->getPaginator($this->articleRepository->getAllCount(),
@@ -37,12 +38,17 @@ class ArticlesPresenter extends Nette\Application\UI\Presenter
 
 		$template = $this->getTemplate();
 		$template->articles = $articles;
-		$template->user = $user;
+		$template->currentUser = $currentUser;
 		$template->subTitle = "články";
 	}
 
 	protected function createComponentPagination()
 	{
-		return new Mirin\AdminModule\Components\Pagination($this->paginator, $this->link("this"));
+		return new Components\Pagination($this->paginator, $this->link("this"));
+	}
+
+	protected function createComponentMenu()
+	{
+		return new Components\Menu(Components\Menu::ITEM_ARTICLES);
 	}
 }
