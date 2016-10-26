@@ -18,19 +18,30 @@ one for the web, one for the database administration. There are Dockerfiles
 for these containers.
 For help use ```manage.sh --help```. Common operations
 
-    - go to docker directory
+    # go to docker directory
     $ cd docker
-     - builds the image for web container
+    
+    # builds the image for web container
     $ manage.sh buildImage web 
-     - builds the image for database administration container
+    
+    # builds the image for database administration container
     $ manage.sh buildImage dbm
-     - stars the web container
+    
+    # just call the docker-compose for our project, prints the
+    # all docker-compose help
+    $ manage.sh compose
+    
+    # stars the web container, one or all project containers
     $ manage.sh compose up -d mirin.cz
-     - stop all containers
+    $ manage.sh compose up -d
+    
+    # stop all containers
     $ manage.sh compose stop
-     - call the composer install inside web container
+    
+    # call the composer install inside web container
     $ manage.sh exec mirin.cz composer install
-     - import dump into database
+    
+    #  import dump into database
     $ manage.sh exec db bash -c "mysql -u root -plocaldb mirin < /usr/src/dbumps/mirin.sql"
     
 As you can see, ```compose``` sub command simple calls the anything with ```docker-compose```
