@@ -26,6 +26,9 @@ class RouterFactory
 		$router[] = new Routers\Route("/admin/articles/add", "Admin:NewArticle:default");
 		$router[] = new Routers\Route("/admin/articles/<id [0-9]+>", "Admin:EditArticle:default");
 		$router[] = new Routers\Route("/admin/articles/preview/<slug [a-z0-9_-]+>", "Admin:PreviewArticle:default");
+		// redirects into /admin/articles, because it's same destination, and first defined route is the
+		// main route
+		$router[] = new Routers\Route("/admin", "Admin:Articles:default");
 
 		$router[] = new Routers\Route("/admin/comments", "Admin:Comments:default");
 		$router[] = new Routers\Route("/admin/comments/<id [0-9]+>", "Admin:EditComment:default");
