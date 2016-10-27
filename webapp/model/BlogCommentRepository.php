@@ -1,6 +1,7 @@
 <?php
 namespace Mirin\Model;
 use Dibi;
+use Nette\Utils\Paginator;
 
 class BlogCommentRepository
 {
@@ -76,4 +77,32 @@ class BlogCommentRepository
 		]);
 	}
 
+	/**
+	 * @return int
+	 */
+	public function getAllCount()
+	{
+		return (int)$this->db->fetchSingle("select count(*) from comment");
+	}
+
+	/**
+	 * Get list of comments for particular page
+	 * It's used mostly for administration
+	 * @param Paginator $paginator
+	 * @return array
+	 */
+	public function getForPage(Paginator $paginator)
+	{
+		foreach ($this->db->fetchAll("select comment.*,
+				article.title as articleTitle
+			from comment
+			inner join article on article.id = comment.article_id
+			order by posted desc
+			%lmt %ofs", $paginator->getItemsPerPage(), $paginator->getOffset())
+			as $commentRow) {
+			$comments[] = new BlogComment($commentRow);
+		}
+
+		return isset($comments) ? $comments : [];
+	}
 }

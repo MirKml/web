@@ -20,6 +20,12 @@ class EditArticlePresenter extends Nette\Application\UI\Presenter
 	public $authorRepository;
 
 	/**
+	 * @inject
+	 * @var Mirin\AdminModule\Components\IArticleFormFactory
+	 */
+	public $articleFormFactory;
+
+	/**
 	 * @var \Dibi\Row;
 	 */
 	private $currentUser;
@@ -70,7 +76,7 @@ class EditArticlePresenter extends Nette\Application\UI\Presenter
 	 */
 	protected function createComponentArticleForm()
 	{
-		$component = new Components\ArticleForm($this->articleRepository, $this->authorRepository);
+		$component = $this->articleFormFactory->create();
 		$component->setCurrentArticle($this->article);
 		return $component;
 	}

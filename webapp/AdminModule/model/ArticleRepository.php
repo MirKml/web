@@ -48,15 +48,39 @@ class ArticleRepository
 		return $this->db->fetch("select * from article where id = %i", $id);
 	}
 
-	public function update($id, Utils\ArrayHash $values)
+	/**
+	 * Update the article in db
+	 * @param int $id ID of updated article
+	 * @param Utils\ArrayHash $articleData
+	 */
+	public function update($id, Utils\ArrayHash $articleData)
 	{
 		$this->db->query("update article set", [
-			"title" => $values->title,
-			"author_id" => $values->author,
-			"posted" => new \DateTime($values->posted),
-			"titleUrl" => Utils\Strings::webalize($values->title),
-			"text" => $values->mainText,
-			"status" => $values->status
+			"title" => $articleData->title,
+			"author_id" => $articleData->author,
+			"posted" => new \DateTime($articleData->posted),
+			"titleUrl" => Utils\Strings::webalize($articleData->title),
+			"text" => $articleData->mainText,
+			"status" => $articleData->status
 		], "where id = %i", $id);
+	}
+
+	/**
+	 * Insert new article into db
+	 * @param Utils\ArrayHash $articleData
+	 * @return int ID of new db record
+	 */
+	public function insert(Utils\ArrayHash $articleData)
+	{
+		$this->db->query("insert into article", [
+			"title" => $articleData->title,
+			"author_id" => $articleData->author,
+			"posted" => new \DateTime($articleData->posted),
+			"titleUrl" => Utils\Strings::webalize($articleData->title),
+			"text" => $articleData->mainText,
+			"status" => $articleData->status,
+			"plainText" => ""
+		]);
+		return $this->db->getInsertId();
 	}
 }

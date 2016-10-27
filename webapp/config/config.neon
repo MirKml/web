@@ -29,6 +29,7 @@ services:
 	- Mirin\Components\ICategoriesFactory
 
 	- Mirin\AdminModule\Model\ArticleRepository
+	- Mirin\AdminModule\Components\IArticleFormFactory
 
 	router: Mirin\RouterFactory::createRouter
 	authenticator: Mirin\BlogAuthorAuthenticator

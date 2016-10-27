@@ -8,28 +8,31 @@
         {control menu}
         <!-- /col-3 -->
         <div class="col-sm-9">
-            <p></p><strong><i class="glyphicon glyphicon-list"></i> Články</strong></p>
-            <p><a href="{link NewArticle:}">Vložit nový článek</a></p>
+            <p></p><strong><i class="glyphicon glyphicon-list"></i> Komentáře</strong></p>
             <hr>
 
             <div class="row">
                 <div class="col-md-12">
-                    {if $articles}
+                    {if $comments}
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Titulek</th>
-                                <th>Datum vydání</th>
-                                <th>Stav</th>
+                                <th>Vloženo</th>
+                                <th>Článek</th>
+                                <th>Jméno</th>
+                                <th>Email</th>
+                                <th>Web</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {foreach $articles as $article}
+                            {foreach $comments as $comment}
                             <tr>
-                                <td><a href="{link EditArticle: $article->id}">{$article->title}</a></td>
-                                <td>{$article->posted->format("Y-m-d H:i")}</td>
-                                <td>{$article->status}</td>
+                                <td>{$comment->posted->format("Y-m-d H:i")}</td>
+                                <td><a href="{link EditArticle: $comment->article_id}">{$comment->articleTitle}</td>
+                                <td>{$comment->name}</td>
+                                <td>{$comment->email}</td>
+                                <td>{$comment->www}</td>
                             </tr>
                             {/foreach}
                             </tbody>

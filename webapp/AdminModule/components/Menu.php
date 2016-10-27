@@ -34,7 +34,7 @@ class Menu extends Nette\Application\UI\Control
 
 		$item = new \stdClass();
 		$item->name = "Komentáře";
-		$item->url = $this->getPresenter()->lazyLink(":Admin:Articles:");
+		$item->url = $this->getPresenter()->lazyLink(":Admin:Comments:");
 		$item->active = $this->currentItemId == self::ITEM_COMMENTS;
 		$item->glyphicon = "glyphicon-briefcase";
 		$items[] = $item;

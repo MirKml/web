@@ -22,6 +22,11 @@ class Pagination extends Nette\Application\UI\Control
 		parent::__construct();
 	}
 
+	protected function getTemplateFile()
+	{
+		return __DIR__ . "/templates/pagination.latte";
+	}
+
 	public function render()
 	{
 		$template = $this->getTemplate();
@@ -38,7 +43,7 @@ class Pagination extends Nette\Application\UI\Control
 		$template->firstRangePage = $firstRangePage;
 		$template->lastRangePage = $lastRangePage;
 		$template->pageCount = $pageCount;
-		$template->setFile(__DIR__ . "/templates/pagination.latte");
+		$template->setFile($this->getTemplateFile());
 		$template->render();
 	}
 }

@@ -1,0 +1,19 @@
+<ul class="pagination">
+    {if $currentPage > 1}
+        <li><a href="{$firstPageUrl}">&lt;&lt;</a></li>
+        <li><a href="{$firstPageUrl}?page={$currentPage - 1}">&lt;</a></li>
+    {/if}
+
+    {foreach range($firstRangePage, $lastRangePage) as $pageNumber}
+        {if $pageNumber == $currentPage}
+            <li class="disabled"><a><strong>{$pageNumber}</strong></a>
+        {else}
+            <li><a href="{$firstPageUrl}?page={$pageNumber}">{$pageNumber}</a></li>
+        {/if}
+    {/foreach}
+
+    {if $currentPage < $pageCount}
+        <li><a href="{$firstPageUrl}?page={$currentPage + 1}">&gt;</a></li>
+        <li><a href="{$firstPageUrl}?page={$pageCount}">&gt;&gt;</a></li>
+    {/if}
+</ul>

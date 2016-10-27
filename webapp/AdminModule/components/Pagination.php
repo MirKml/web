@@ -7,4 +7,9 @@ use Mirin;
  * @package Mirin\AdminModule\Components
  */
 class Pagination extends Mirin\Components\Pagination
-{}
+{
+	protected function getTemplateFile()
+	{
+		return __DIR__ . "/templates/pagination.latte";
+	}
+}

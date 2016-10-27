@@ -6,10 +6,12 @@ class BlogComment
 {
 	public $id;
 	public $article_id;
+	public $articleTitle;
 	public $name;
 	public $email;
 	public $message;
 	public $www;
+
 	/**
 	 * @var \DateTime
 	 */

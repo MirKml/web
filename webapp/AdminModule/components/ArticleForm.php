@@ -36,10 +36,12 @@ class ArticleForm extends UI\Control
 
 	public function processForm(UI\Form $form)
 	{
+		$articleData = $form->getValues();
+
+		// update article
 		if ($this->currentArticle) {
 			try {
-				$this->articleRepository->update($this->currentArticle->id,
-					$form->getValues());
+				$this->articleRepository->update($this->currentArticle->id, $articleData);
 			} catch (\Dibi\Exception $e) {
 				$form->addError("Nemohu aktualizovat záznam: " . $e->getMessage());
 				return;
@@ -47,6 +49,16 @@ class ArticleForm extends UI\Control
 			$this->flashMessage("Záznam aktualizován");
 			$this->getPresenter()->redirect(":Admin:EditArticle:", $this->currentArticle->id);
 		}
+
+		// insert new article
+		try {
+			$newArticleId = $this->articleRepository->insert($articleData);
+		} catch (\Dibi\Exception $e) {
+			$form->addError("Nemohu vložit záznam: " . $e->getMessage());
+			return;
+		}
+		$this->flashMessage("Záznam o článku {$articleData->title} uložen, můžete ho upravit");
+		$this->getPresenter()->redirect(":Admin:EditArticle:", $newArticleId);
 	}
 
 	protected function createComponentInnerForm()
@@ -65,10 +77,10 @@ class ArticleForm extends UI\Control
 		}
 
 		$form->addText("posted", "Vytvořeno")
-			->setRequired();
-		if ($this->currentArticle) {
-			$form["posted"]->setDefaultValue($this->currentArticle->posted->format("Y-m-d H:i"));
-		}
+			->setRequired()
+			->setDefaultValue($this->currentArticle
+				? $this->currentArticle->posted->format("Y-m-d H:i")
+				: date("Y-m-d H:i"));
 
 		$form->addTextArea("mainText", "Text článku (wiki syntaxe)")
 			->setRequired();
@@ -77,10 +89,10 @@ class ArticleForm extends UI\Control
 		}
 
 		$form->addSelect("status", "Stav")
-			->setItems(["published", "new"], false);
-		if ($this->currentArticle) {
-			$form["status"]->setDefaultValue($this->currentArticle->status);
-		}
+			->setItems(["published", "new"], false)
+			->setDefaultValue($this->currentArticle
+				? $this->currentArticle->status
+				: "new");
 
 		$form->addSubmit("save", "Ulož");
 
@@ -94,4 +106,12 @@ class ArticleForm extends UI\Control
 		$template->setFile(__DIR__ . "/templates/articleForm.latte");
 		$template->render();
 	}
+}
+
+interface IArticleFormFactory
+{
+	/**
+	 * @return ArticleForm
+	 */
+	public function create();
 }
