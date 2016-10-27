@@ -18,6 +18,7 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Vloženo</th>
                                 <th>Článek</th>
                                 <th>Jméno</th>
@@ -28,8 +29,9 @@
                             <tbody>
                             {foreach $comments as $comment}
                             <tr>
+                                <td><a href="{link EditComment: $comment->id}">{$comment->id}</td>
                                 <td>{$comment->posted->format("Y-m-d H:i")}</td>
-                                <td><a href="{link EditArticle: $comment->article_id}">{$comment->articleTitle}</td>
+                                <td><a href="{link :BlogArticle: $comment->articleSlug}">{$comment->articleTitle}</td>
                                 <td>{$comment->name}</td>
                                 <td>{$comment->email}</td>
                                 <td>{$comment->www}</td>

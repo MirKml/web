@@ -2,6 +2,9 @@
 namespace Mirin\Components;
 use Nette;
 
+/**
+ * Pagination for list of items
+ */
 class Pagination extends Nette\Application\UI\Control
 {
 

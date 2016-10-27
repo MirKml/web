@@ -87,6 +87,23 @@ class BlogArticleRepository
 	}
 
 	/**
+	 * Gets the article for preview.
+	 * Status doens't matter.
+	 * @param string $slug
+	 * @return BlogArticle|void
+	 */
+	public function getForPreview($slug)
+	{
+		$articleRow = $this->db->fetch("select title, posted, text, format,
+			author.name as authorName
+			from article
+			inner join author on author.id = article.author_id
+			where titleUrl = %s", $slug);
+		if (!$articleRow) return;
+		return new BlogArticle($articleRow);
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getPublishedCount()

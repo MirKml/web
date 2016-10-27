@@ -1,0 +1,33 @@
+{form innerForm}
+    {if $control["innerForm"]->hasErrors()}
+        <div class="alert alert-warning">
+            {foreach $control["innerForm"]->getErrors() as $error}
+                <p><strong>Chyba!</strong> {$error}</p>
+            {/foreach}
+        </div>
+    {/if}
+    {foreach $flashes as $flash}
+        <p class="alert alert-info">{$flash->message}</p>
+    {/foreach}
+    <div class="form-group">
+        {label visitor}
+        {input visitor class => form-control}
+    </div>
+    <div class="form-group">
+        {label email}
+        {input email class => form-control}
+    </div>
+    <div class="form-group">
+        {label www}
+        {input www class => form-control}
+    </div>
+    <div class="form-group">
+        {label posted}
+        {input posted class => form-control}
+    </div>
+    <div class="form-group">
+        {label message}
+        {input message class => form-control, rows => 20}
+    </div>
+    {input save class => "btn btn-default"}
+{/form}

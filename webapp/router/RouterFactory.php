@@ -25,8 +25,10 @@ class RouterFactory
 		$router[] = new Routers\Route("/admin/articles", "Admin:Articles:default");
 		$router[] = new Routers\Route("/admin/articles/add", "Admin:NewArticle:default");
 		$router[] = new Routers\Route("/admin/articles/<id [0-9]+>", "Admin:EditArticle:default");
+		$router[] = new Routers\Route("/admin/articles/preview/<slug [a-z0-9_-]+>", "Admin:PreviewArticle:default");
 
 		$router[] = new Routers\Route("/admin/comments", "Admin:Comments:default");
+		$router[] = new Routers\Route("/admin/comments/<id [0-9]+>", "Admin:EditComment:default");
 
 		return $router;
 	}

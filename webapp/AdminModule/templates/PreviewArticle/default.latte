@@ -1,0 +1,15 @@
+{block content}
+<div>
+    <article class="hentry" role="article">
+        <!-- header for each post -->
+        <header>
+            <p class="meta">{$article->posted|date:"j. n. Y"}</p>
+            <h1 class="entry-title">{$article->title} </h1>
+        </header>
+
+        <div class="entry-content">
+            {$article->getHtmlText()|noescape}
+        </div>
+    </article>
+</div>
+{/block}

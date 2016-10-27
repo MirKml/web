@@ -1,7 +1,7 @@
 <?php
 namespace Mirin\Model;
 use Dibi;
-use Nette\Utils\Paginator;
+use Nette\Utils;
 
 class BlogCommentRepository
 {
@@ -59,6 +59,7 @@ class BlogCommentRepository
 	/**
 	 * Gets count of comments for the article
 	 * @param BlogArticle $article
+	 * @return int
 	 */
 	public function getCountForArticle(BlogArticle $article)
 	{
@@ -78,6 +79,40 @@ class BlogCommentRepository
 	}
 
 	/**
+	 * Get comment by ID with article title.
+	 * Mostly used in the administration
+	 * @param int $id article id
+	 * @return BlogComment|null
+	 */
+	public function getById($id)
+	{
+		if (($row = $this->db->fetch("select comment.*,
+		 		article.title as articleTitle,
+		 		article.titleURL as articleSlug
+		 	from comment
+			inner join article on article.id = comment.article_id
+		 	where comment.id = %i", $id))) {
+			return new BlogComment($row);
+		}
+	}
+
+	/**
+	 * Updates particular comment by ID.
+	 * @param int $id
+	 * @param Utils\ArrayHash $commentData
+	 */
+	public function update($id, Utils\ArrayHash $commentData)
+	{
+		$this->db->query("update comment set", [
+			"name" => $commentData->visitor,
+			"email" => $commentData->email,
+			"message" => $commentData->message,
+			"www" => $commentData->www,
+			"posted" => $commentData->posted
+		], "where id = %i", $id);
+	}
+
+	/**
 	 * @return int
 	 */
 	public function getAllCount()
@@ -88,13 +123,14 @@ class BlogCommentRepository
 	/**
 	 * Get list of comments for particular page
 	 * It's used mostly for administration
-	 * @param Paginator $paginator
+	 * @param Utils\Paginator $paginator
 	 * @return array
 	 */
-	public function getForPage(Paginator $paginator)
+	public function getForPage(Utils\Paginator $paginator)
 	{
 		foreach ($this->db->fetchAll("select comment.*,
-				article.title as articleTitle
+				article.title as articleTitle,
+		 		article.titleURL as articleSlug
 			from comment
 			inner join article on article.id = comment.article_id
 			order by posted desc

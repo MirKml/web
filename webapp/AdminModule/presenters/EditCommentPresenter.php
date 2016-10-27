@@ -4,15 +4,8 @@ use Nette;
 use Mirin;
 use Mirin\AdminModule\Components;
 
-class EditArticlePresenter extends Nette\Application\UI\Presenter
+class EditCommentPresenter extends Nette\Application\UI\Presenter
 {
-
-	/**
-	 * @inject
-	 * @var Mirin\AdminModule\Model\ArticleRepository
-	 */
-	public $articleRepository;
-
 	/**
 	 * @inject
 	 * @var Mirin\Model\BlogAuthorRepository
@@ -21,9 +14,9 @@ class EditArticlePresenter extends Nette\Application\UI\Presenter
 
 	/**
 	 * @inject
-	 * @var Mirin\AdminModule\Components\IArticleFormFactory
+	 * @var Mirin\Model\BlogCommentRepository
 	 */
-	public $articleFormFactory;
+	public $commentRepository;
 
 	/**
 	 * @var \Dibi\Row;
@@ -31,13 +24,13 @@ class EditArticlePresenter extends Nette\Application\UI\Presenter
 	private $currentUser;
 
 	/**
-	 * @var \Dibi\Row;
+	 * @var Mirin\Model\BlogComment
 	 */
-	private $article;
+	private $comment;
 
 	/**
 	 * Check the log in user, and gets the current article from database.
-	 * It's necessary to get the article from db there, not till in render method.
+	 * It's necessary to get the comment from db there, not till in render method.
 	 * Because when the form is submitted, render method isn't called before form component factory
 	 *
 	 * @param int $id article id
@@ -50,17 +43,17 @@ class EditArticlePresenter extends Nette\Application\UI\Presenter
 		}
 		$this->currentUser = $this->authorRepository->getById($this->getUser()->getId());
 
-		if (!($this->article = $this->articleRepository->getById($id))) {
-			throw new Nette\Application\BadRequestException("article with id '$id' doesn't exist");
+		if (!($this->comment = $this->commentRepository->getById($id))) {
+			throw new Nette\Application\BadRequestException("comment with id '$id' doesn't exist");
 		}
 	}
 
 	public function renderDefault()
 	{
 		$template = $this->getTemplate();
-		$template->article = $this->article;
+		$template->comment = $this->comment;
 		$template->currentUser = $this->currentUser;
-		$template->subTitle = "Editace článku {$this->article->title}";
+		$template->subTitle = "Editace komentáře {$this->comment->id}";
 	}
 
 	/**
@@ -68,16 +61,14 @@ class EditArticlePresenter extends Nette\Application\UI\Presenter
 	 */
 	protected function createComponentMenu()
 	{
-		return new Components\Menu(Components\Menu::ITEM_ARTICLES);
+		return new Components\Menu(Components\Menu::ITEM_COMMENTS);
 	}
 
 	/**
-	 * @return Components\ArticleForm
+	 * @return Components\CommentForm
 	 */
-	protected function createComponentArticleForm()
+	protected function createComponentCommentForm()
 	{
-		$component = $this->articleFormFactory->create();
-		$component->setCurrentArticle($this->article);
-		return $component;
+		return new Components\CommentForm($this->commentRepository, $this->comment);
 	}
 }

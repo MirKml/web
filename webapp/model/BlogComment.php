@@ -7,6 +7,7 @@ class BlogComment
 	public $id;
 	public $article_id;
 	public $articleTitle;
+	public $articleSlug;
 	public $name;
 	public $email;
 	public $message;

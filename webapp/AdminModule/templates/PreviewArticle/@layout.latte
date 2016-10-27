@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+    <!--Fonts from Google's Web font directory at http://google.com/webfonts added from Octo -->
+    <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet"
+          type="text/css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet"
+          type="text/css">
+
+    <!-- goes into the title bar -->
+    <title>Mirin webspace{if $pageSubTitle} - {$pageSubTitle}{/if}</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="/css/hugo-octopress.css">
+    <link rel="stylesheet" href="/css/mirin.css">
+
+    <!-- For sidebar icons - TODO: find local icons I guess-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+</head>
+
+<body>
+<!-- top header -->
+<header role="banner">
+    <hgroup>
+        <h1><a href="/">Mirin webspace</a></h1>
+        <h2>Nejbohatší život má ten, kdo žije s minimem nároků</h2>
+    </hgroup>
+</header>
+
+<!-- navigation -->
+<nav role="navigation">
+    <ul class="main-navigation">
+        <li><a href="" title="blog">Náhled</a></li>
+    </ul>
+</nav>
+
+<div id="main">
+    <div id="content">
+        {block content}{/block}
+
+        <aside class="sidebar thirds">
+            <section class="first odd">
+                <h1>Kdo jsem?</h1>
+            </section>
+
+            <!-- Sidebar social network icons -->
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a target="_blank" href="https://github.com/MirKml" title="githug"><i class="fa fa-github fa-3x"></i></a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+</div>
+
+<footer role="contentinfo">
+    <p>
+        Copyright &copy; 2007 - {date("Y")} Mirek Kubelík.
+    </p>
+</footer>
+
+</body>
+</html>
