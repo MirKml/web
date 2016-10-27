@@ -63,6 +63,16 @@ class ArticleRepository
 			"text" => $articleData->mainText,
 			"status" => $articleData->status
 		], "where id = %i", $id);
+
+		if (isset($articleData->categories)) {
+			$this->db->query("delete from categoryarticle where article_id = %i", $id);
+			foreach ($articleData->categories as $categoryId) {
+				$this->db->query("insert into categoryarticle", [
+					"article_id" => $id,
+					"category_id" => $categoryId
+				]);
+			}
+		}
 	}
 
 	/**

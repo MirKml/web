@@ -17,15 +17,23 @@ class ArticleForm extends UI\Control
 	private $authorRepository;
 
 	/**
+	 * @inject
+	 * @var Model\BlogCategoryRepository
+	 */
+	private $categoriesRepository;
+
+	/**
 	 * @var \Dibi\Row
 	 */
 	private $currentArticle;
 
 	public function __construct(AdminModule\Model\ArticleRepository $articleRepository,
-		Model\BlogAuthorRepository $authorRepository)
+		Model\BlogAuthorRepository $authorRepository, Model\BlogCategoryRepository $categoryRepository)
 	{
 		$this->articleRepository = $articleRepository;
 		$this->authorRepository = $authorRepository;
+		$this->categoriesRepository = $categoryRepository;
+
 		parent::__construct();
 	}
 
@@ -81,6 +89,14 @@ class ArticleForm extends UI\Control
 			->setDefaultValue($this->currentArticle
 				? $this->currentArticle->posted->format("Y-m-d H:i")
 				: date("Y-m-d H:i"));
+
+		$categories = $this->categoriesRepository->getNamesWithIDs();
+		$form->addMultiSelect("categories", "Kategorie", $categories);
+		if ($this->currentArticle) {
+			$form["categories"]->setDefaultValue($this->categoriesRepository->getIDsForArticle(
+				$this->currentArticle->id
+			));
+		}
 
 		$form->addTextArea("mainText", "Text článku (wiki syntaxe)")
 			->setRequired();

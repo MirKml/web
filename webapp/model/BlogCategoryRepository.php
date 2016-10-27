@@ -26,6 +26,32 @@ class BlogCategoryRepository
 			->fetchAssoc("article_id[]");
 	}
 
+	/**
+	 * Gets category IDs for particular article
+	 * It's used in the article administration
+	 * @param int $articleId
+	 * @return array
+	 */
+	public function getIDsForArticle($articleId)
+	{
+		return $this->db->query("select categoryarticle.article_id, category.*
+			from categoryarticle
+			inner join category on categoryarticle.category_id = category.id 
+			where categoryarticle.article_id = %i", $articleId)
+			->fetchAssoc("[]=id");
+	}
+
+	/**
+	 * Gets category names with IDs.
+	 * It's used in the article administration.
+	 * @return array
+	 */
+	public function getNamesWithIDs()
+	{
+		return $this->db->query("select id,name from category")
+			->fetchAssoc("id|=name");
+	}
+
 	public function getAll()
 	{
 		return $this->db->fetchAll("select * from category");
