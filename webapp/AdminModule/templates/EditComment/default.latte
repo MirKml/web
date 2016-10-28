@@ -15,6 +15,10 @@
             <p><strong>Článek:</strong> <a href="{link :BlogArticle: $comment->articleSlug}">{$comment->articleTitle}<a/></p>
             <hr>
 
+            <p><a class="btn btn-default"
+                  onclick="gotoDelete({$comment->id}, {$comment->posted->format("Y-m-d H:i")}, {$comment->name}, {link DeleteComment: $comment->id})">Smazat</a>
+            </p>
+
             <div class="row">
                 <div class="col-md-12">
                     {control commentForm}

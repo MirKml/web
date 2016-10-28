@@ -112,6 +112,11 @@ class BlogCommentRepository
 		], "where id = %i", $id);
 	}
 
+	public function delete($id)
+	{
+		$this->db->query("delete from comment where id = %i", $id);
+	}
+
 	/**
 	 * @return int
 	 */

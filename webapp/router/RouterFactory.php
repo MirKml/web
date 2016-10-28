@@ -32,6 +32,7 @@ class RouterFactory
 
 		$router[] = new Routers\Route("/admin/comments", "Admin:Comments:default");
 		$router[] = new Routers\Route("/admin/comments/<id [0-9]+>", "Admin:EditComment:default");
+		$router[] = new Routers\Route("/admin/comments/delete/<id [0-9]+>", "Admin:DeleteComment:default");
 
 		return $router;
 	}
