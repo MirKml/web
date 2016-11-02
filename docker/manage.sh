@@ -4,7 +4,7 @@
 # which I touched. It's mostly wrapper for docker-composer and docker command.
 MAIN_DIR=$(dirname "$0")
 PROJECT=mirinweb
-CONTAINERS=( www dbm )
+CONTAINERS=( mirin.cz dbm )
 SCRIPT_NAME=${0##*/}
 
 usage() {
