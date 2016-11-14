@@ -60,6 +60,7 @@ class ArticleRepository
 			"author_id" => $articleData->author,
 			"posted" => new \DateTime($articleData->posted),
 			"titleUrl" => Utils\Strings::webalize($articleData->title),
+			"format" => $articleData->format,
 			"text" => $articleData->mainText,
 			"status" => $articleData->status
 		], "where id = %i", $id);
@@ -87,6 +88,7 @@ class ArticleRepository
 			"author_id" => $articleData->author,
 			"posted" => new \DateTime($articleData->posted),
 			"titleUrl" => Utils\Strings::webalize($articleData->title),
+			"format" => $articleData->format,
 			"text" => $articleData->mainText,
 			"status" => $articleData->status,
 			"plainText" => ""

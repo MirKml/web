@@ -98,7 +98,11 @@ class ArticleForm extends UI\Control
 			));
 		}
 
-		$form->addTextArea("mainText", "Text článku (wiki syntaxe)")
+		$form->addSelect("format", "Formát")
+			->setItems(["html", "wiki"], false)
+			->setDefaultValue($syntax = $this->currentArticle ? $this->currentArticle->format : "wiki");
+
+		$form->addTextArea("mainText", "Text článku ($syntax syntaxe)")
 			->setRequired();
 		if ($this->currentArticle) {
 			$form["mainText"]->setDefaultValue($this->currentArticle->text);
