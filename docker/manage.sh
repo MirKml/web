@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Simple script for easy management for pilulka.cz docker based project
-# which I touched. It's mostly wrapper for docker-composer and docker command.
+# Simple script for easy managing development of mirin.cz docker based project.
+# It's mostly wrapper for docker-composer and docker command.
 MAIN_DIR=$(dirname "$0")
 PROJECT=mirinweb
 CONTAINERS=( mirin.cz dbm )
