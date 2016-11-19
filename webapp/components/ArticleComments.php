@@ -2,6 +2,7 @@
 namespace Mirin\Components;
 use Mirin\Model;
 use Nette\Application\UI;
+use Nette\Utils;
 
 class ArticleComments extends UI\Control
 {
@@ -72,7 +73,7 @@ class ArticleComments extends UI\Control
 			"name" => $form["name"]->getValue(),
 			"email" => $form["email"]->getValue(),
 			"www" => $form["www"]->getValue() ?: null,
-			"message" => $form["message"]->getValue(),
+			"message" => Utils\Strings::trim($form["message"]->getValue()),
 			"posted" => new \DateTime()
 		]);
 		if ($form->isSubmitted()->getName() == "preview") {
