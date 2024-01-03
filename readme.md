@@ -6,9 +6,13 @@ Development is based on docker in VirtualBox guest Ubuntu server machine.
 
 Requirements
 ------------
+PHP 5.6 or higher, Apache, Docker for development
 
-PHP 5.6 or higher, Apache, Docker
-
+Works on Debian 12 (bookworm) with Apache, MariaDb from distribution.
+- latest old PHP 7.4 [installed](https://d0m.me/2023/10/01/debian-12-bookworm-install-php-7-4/) from deb.sury.org backports 👍 - libapache2-mod-php7.4 for Apache
+- apt-get install php7.4-mysql
+- apt-get install php7.4-intl
+ 
 Docker usage
 ------------
 Docker is used for easy cross machine and operating system development. 
