@@ -26,7 +26,7 @@ AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application
 
 # be aware that redirect and alies directives can be processed after the rewrite directives
 # but nowadays they don't :-)
-RedirectMatch ^/media/(.*) http://vhost.mirin.cz/media/$1
+RedirectMatch ^/media/(.*) https://vhost.mirin.cz/media/$1
 RedirectMatch permanent ^/projects/ /about
 RedirectMatch permanent ^/blog/?$ /
 RedirectMatch permanent ^/blog/feed$ /rss.xml
